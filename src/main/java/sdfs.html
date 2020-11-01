@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function findAnswer() {
+        if (setting.num >= $('.TiMu').length) {
+            var arr = setting.lose ? ['共有 <font color="red">' + setting.lose + '</font> 道题目待完善（已深色标注）', saveThis] : ['答题已完成<a href="https://open.weixin.qq.com/qr/code?username=gh_b007ef230e12" target="_blank">&nbsp;刷新仍无答案请移步公众号</a>', submitThis];
+            setting.div.children('div:eq(0)').data('html', arr[0]).siblings('button:eq(0)').hide().click();
+            return setTimeout(arr[1], setting.time);
+        }
+        var $TiMu = $('.TiMu').eq(setting.num),
+            question = filterImg($TiMu.find('.Zy_TItle:eq(0) .clearfix')).replace(/^【.*?】\s*/, '').replace(/\s*（\d+\.\d+分）$/, '').replace(/^\d+[\.、]/,''),
+            type = $TiMu.find('input[name^=answertype]:eq(0)').val() || '-1';
+        GM_xmlhttpRequest({
+            method: 'POST',
+            url: 'http://qs.nnarea.cn/chaoxing_war/topicServlet?action=query&q=' + encodeURIComponent(question),
+            headers: {
+                'Content-type': 'application/x-www-form-urlencoded'
+            },
+            data: 'course=' + encodeURIComponent(setting.curs) + '&type=' + type + '&id=' + ($('#workLibraryId').val() || $('#oldWorkId').val()),
+            timeout: setting.time,
+            onload: function(xhr) {
+                if (!setting.loop) {
+                } else if (xhr.status == 200) {
+                    var obj = $.parseJSON(xhr.responseText) || {};
+                    if (true){
+                        //var a = document.createElement('a');
+                        //var href = "https://open.weixin.qq.com/qr/code?username=gh_b007ef230e12"
+                        //a.setAttribute('href', href);
+                        setting.div.children('div:eq(0)').text('正在搜索答案');
+                        //setting.div.children('div:eq(0)').appendChild(a);
+                        console.log(obj.data)
+                        var td = '<td style="border: 1px solid;',
+                            data = String(obj.data).replace(/&/g, '&amp;').replace(/<(?!img)/g, '&lt;');
+                        obj.data = /^http/.test(data) ? '<img src="' + obj.data + '">' : obj.data;
+                        $(
+                            '<tr>' +
+                            td + ' text-align: center;">' + $TiMu.find('.Zy_TItle:eq(0) i').text().trim() + '</td>' +
+                            td + '" title="点击可复制">' + (question.match('<img') ? question : question.replace(/&/g, '&amp;').replace(/</g, '&lt')) + '</td>' +
+                            td + '" title="点击可复制">' + (/^http/.test(data) ? obj.data : '') + data + '</td>' +
+                            '</tr>'
+                        ).appendTo(setting.div.find('tbody')).css('background-color', fillAnswer($TiMu.find('ul:eq(0)').find('li'), obj, type) ? '' : 'rgba(99, 215, 247, 0.6)');
+                        setting.data[setting.num++] = {
+                            code: obj.code > 0 ? 1 : 0,
+                            question: question,
+                            option: obj.data,
+                            type: Number(type)
+                        };
+                    } else {
+                        setting.div.children('div:eq(0)').html(obj.data || setting.over + '服务器繁忙，正在重试...');
+                    }
+                    setting.div.children('span').html(obj || '');
+                } else if (xhr.status == 403) {
+                    var html = xhr.responseText.indexOf('{') ? '请求过于频繁，建议稍后再试' : $.parseJSON(xhr.responseText).data;
+                    setting.div.children('div:eq(0)').data('html', html).siblings('button:eq(0)').click();
+                } else {
+                    setting.div.children('div:eq(0)').html(setting.over + '服务器异常，正在重试...');
+                }
+            },
+            ontimeout: function() {
+                setting.loop && setting.div.children('div:eq(0)').html(setting.over + '服务器超时，正在重试...');
+            }
+        });
+    }
+</script>
+</body>
+</html>
