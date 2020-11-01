@@ -35,7 +35,7 @@ public class likou78 {
             int all=res.size();
             for (int j = 0; j <all ; j++) {
                 List<Integer> tmp=new ArrayList<>(res.get(j));
-                //添加
+                //添加单个num[i]
                 tmp.add(nums[i]);
                 res.add(tmp);
             }
