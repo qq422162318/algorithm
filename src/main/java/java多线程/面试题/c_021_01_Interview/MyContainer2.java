@@ -21,7 +21,6 @@ public class MyContainer2<T> {
             while(lists.size() == MAX) { //想想为什么用while而不是用if？
                 producer.await();
             }
-
             lists.add(t);
             ++count;
             consumer.signalAll(); //通知消费者线程进行消费
@@ -31,7 +30,6 @@ public class MyContainer2<T> {
             lock.unlock();
         }
     }
-
     public T get() {
         T t = null;
         try {
@@ -58,13 +56,7 @@ public class MyContainer2<T> {
                 for(int j=0; j<5; j++) System.out.println(c.get());
             }, "c" + i).start();
         }
-
-        try {
-            TimeUnit.SECONDS.sleep(2);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        try { TimeUnit.SECONDS.sleep(2); } catch (InterruptedException e) { e.printStackTrace(); }
         //启动生产者线程
         for(int i=0; i<2; i++) {
             new Thread(()->{
