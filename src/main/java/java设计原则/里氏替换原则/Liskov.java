@@ -1,4 +1,4 @@
-package java设计模式.里氏替换原则;
+package java设计原则.里氏替换原则;
 
 public class Liskov {
     public static void main(String[] args) {

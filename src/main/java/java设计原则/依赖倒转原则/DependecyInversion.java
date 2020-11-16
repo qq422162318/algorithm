@@ -1,4 +1,4 @@
-package java设计模式.依赖倒转原则;
+package java设计原则.依赖倒转原则;
 
 public class DependecyInversion {
     public static void main(String[] args) {

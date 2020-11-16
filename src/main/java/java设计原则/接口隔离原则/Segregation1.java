@@ -1,4 +1,4 @@
-package java设计模式.接口隔离原则;
+package java设计原则.接口隔离原则;
 
 public class Segregation1 {
     public static void main(String[] args) {

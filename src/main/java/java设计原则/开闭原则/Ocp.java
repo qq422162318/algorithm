@@ -1,4 +1,4 @@
-package java设计模式.开闭原则;
+package java设计原则.开闭原则;
 
 public class Ocp {
     public static void main(String[] args) {
