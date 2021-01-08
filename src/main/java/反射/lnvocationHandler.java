@@ -22,8 +22,9 @@ class domain implements proxyInterface{
 }
 class domainProxy{
     public void testProxy(){
-        Object o = Proxy.newProxyInstance(domain.class.getClassLoader(),
+        proxyInterface o = (proxyInterface) Proxy.newProxyInstance(domain.class.getClassLoader(),
                 new Class[]{proxyInterface.class},
                 new lnvocationHandler());
+        o.dosome();
     }
 }
