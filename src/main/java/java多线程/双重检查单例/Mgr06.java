@@ -3,6 +3,7 @@ package java多线程.双重检查单例;
 public class Mgr06 {
 private static volatile Mgr06 INSTANCE;
 //private static  Mgr06 INSTANCE;
+    
     private Mgr06(){
 
     }
