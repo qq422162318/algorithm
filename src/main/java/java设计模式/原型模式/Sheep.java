@@ -2,14 +2,15 @@ package java设计模式.原型模式;
 
 import javax.xml.soap.SOAPHeader;
 
-public class Sheep implements Cloneable{
+public class Sheep implements Cloneable {
     private int age;
     private String Color;
     private String name;
     public Sheep friend;
-    public Sheep(String name,int age, String color) {
+
+    public Sheep(String name, int age, String color) {
         this.age = age;
-        Color = color;
+        this.Color = color;
         this.name = name;
     }
 
@@ -39,7 +40,7 @@ public class Sheep implements Cloneable{
 
     @Override
     protected Object clone() {
-        Sheep sheep=null;
+        Sheep sheep = null;
         try {
             sheep = (Sheep) super.clone();
         } catch (CloneNotSupportedException e) {

@@ -4,7 +4,7 @@ import jdk.nashorn.internal.ir.CallNode;
 
 public class Client {
     public static void main(String[] args) {
-        CommonHouse commonHouse = new CommonHouse();
+        AbstractHouse commonHouse = new CommonHouse();
         commonHouse.build();
     }
 }

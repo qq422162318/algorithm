@@ -1,15 +1,14 @@
 package java设计模式.原型模式.深拷贝;
 
 import java.io.*;
+import java.util.concurrent.CountDownLatch;
 
-public class DeepProtoType implements Serializable,Cloneable
-{
+public class DeepProtoType implements Serializable,Cloneable {
     public String name;
     public DeepCloneTarget deepCloneTarget;
-    public DeepProtoType(){
-        super();
-    }
+    public DeepProtoType(){ super(); }
     @Override
+    //深拷贝方式1使用clone
     protected Object clone() throws CloneNotSupportedException {
         Object deep=null;
         deep=super.clone();
@@ -17,6 +16,7 @@ public class DeepProtoType implements Serializable,Cloneable
         deepProtoType.deepCloneTarget= (DeepCloneTarget) deepCloneTarget.clone();
         return deepProtoType;
     }
+    //深拷贝方式2 通过对象序列化
     public Object deepClone(){
         ByteArrayOutputStream bos=null;
         ObjectOutputStream oos=null;

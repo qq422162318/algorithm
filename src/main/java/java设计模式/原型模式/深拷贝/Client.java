@@ -6,11 +6,12 @@ public class Client {
         deepProtoType.name="songjiang";
         deepProtoType.deepCloneTarget=new DeepCloneTarget("大牛","yy");
         DeepProtoType clone = (DeepProtoType) deepProtoType.clone();
+
         System.out.println(deepProtoType.name);
         System.out.println(clone.name);
         System.out.println(deepProtoType.deepCloneTarget.hashCode());
         System.out.println(clone.deepCloneTarget.hashCode());
-
+        System.out.println();
         DeepProtoType o = (DeepProtoType) deepProtoType.deepClone();
         System.out.println(deepProtoType.deepCloneTarget.hashCode());
         System.out.println(o.deepCloneTarget.hashCode());
