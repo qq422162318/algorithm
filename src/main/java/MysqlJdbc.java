@@ -11,7 +11,7 @@ public class MysqlJdbc {
 //        stmt.executeUpdate("insert into boys set id=7,boyName=123,userCP=1000");
         String sql="select * from EASYBUY_NEWS";
         ResultSet rs=stmt.executeQuery(sql);
-        System.out.println(rs);
+        System.out.println(rs.next());
 //        while (rs.next()){
 //            String id=rs.getString("id");
 //            String boyName=rs.getString("boyName");

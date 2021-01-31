@@ -1,6 +1,9 @@
 package 算法题;
+import jdk.nashorn.internal.ir.CallNode;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 /**
  * 51. N皇后
@@ -28,10 +31,13 @@ import java.util.List;
 public class likou51 {
     public static void main(String[] args) {
         likou51 likou51 = new likou51();
-        List<List<String>> lists = likou51.solveNQueens(4);
+        List<List<String>> lists = likou51.solveNQueens2(4);
         System.out.println(lists.size());
         for (List<String> list : lists) {
-            System.out.println(list);
+            for (String s : list) {
+                System.out.println(s);
+            }
+            System.out.println("===========");
         }
 
     }
@@ -71,5 +77,60 @@ public class likou51 {
 
             }
         }
+    }
+    public List<List<String>> solveNQueens2(int n) {
+          char[][] board=new char[n][n];
+        for (char[] chars : board) {
+            Arrays.fill(chars, '.');
+        }
+        backtrack(board,0);
+        return res;
+    }
+    List<List<String>> res = new ArrayList<>();
+    public void backtrack(char[][] board,int row){
+       if (row==board.length){
+           res.add(arrayList(board));
+           return;
+       }
+        for (int i = 0; i <board.length ; i++) {
+            if (!check(board,row,i)){
+                continue;
+            }
+            board[row][i]='Q';
+            backtrack(board, row+1);
+            board[row][i]='.';
+        }
+    }
+
+    private boolean check(char[][] board, int row, int col) {
+        int n=board.length;
+        //检测每一行的指定列
+        for (int i = row; i >=0 ; i--) {
+            if (board[i][col]=='Q')
+                return false;
+        }
+        //检测右上board[row-1][col+1]
+        for (int i = row-1,j=col+1; i >=0&&j<n ; i--,j++) {
+            if (board[i][j]=='Q')
+                return false;
+        }
+        //检测左上board[row-1][col-1]
+        for (int i = row-1,j=col-1; i >=0&&j>=0 ; i--,j--) {
+            if (board[i][j]=='Q')
+                return false;
+        }
+       return true;
+    }
+
+    private List<String> arrayList(char[][] board) {
+        LinkedList<String> linkedList = new LinkedList<>();
+        for (char[] chars : board) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (char aChar : chars) {
+                stringBuilder.append(aChar);
+            }
+            linkedList.add(stringBuilder.toString());
+        }
+        return linkedList;
     }
 }
