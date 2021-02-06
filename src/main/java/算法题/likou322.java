@@ -28,12 +28,20 @@ public class likou322 {
     public static void main(String[] args) {
         likou322 likou322 = new likou322();
         int[] coins={1,2,5};
-        int i = likou322.coinChange(coins, 3);
+        memo=new int[100];
+        for (int i = 0; i < memo.length; i++) {
+            memo[i]=0;
+        }
+        int i = likou322.coinChange2(coins, 11);
         System.out.println(i);
+
     }
+    static int[] memo;
+    //自顶向下
     public int coinChange(int[] coins, int amount) {
         if (amount==0)return 0;
         if (amount<0)return -1;
+        if (memo[amount]!=0)return memo[amount];
         int res=Integer.MAX_VALUE;
         for (int i = 0; i < coins.length; i++) {
             int subproblem=coinChange(coins, amount-coins[i]);
@@ -41,6 +49,22 @@ public class likou322 {
             res=Math.min(res,1+subproblem);
         }
         if (res==Integer.MAX_VALUE) return -1;
-        return res;
+        memo[amount]=res;
+        return memo[amount];
+    }
+    //自底向上
+    public int coinChange2(int[] coins,int amount){
+        memo=new int[amount+1];
+        for (int i = 0; i < memo.length; i++) {
+            memo[i]=amount+1;
+        }
+        memo[0]=0;
+        for (int i = 0; i < memo.length; i++) {
+            for (int coin : coins) {
+                if (i-coin<0)continue;
+                memo[i]=Math.min(memo[i],1+memo[i-coin]);
+            }
+        }
+        return (memo[amount]==amount+1)?-1:memo[amount];
     }
 }
