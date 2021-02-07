@@ -31,7 +31,7 @@ import java.util.List;
 public class likou51 {
     public static void main(String[] args) {
         likou51 likou51 = new likou51();
-        List<List<String>> lists = likou51.solveNQueens2(4);
+        List<List<String>> lists = likou51.solveNQueens2(10);
         System.out.println(lists.size());
         for (List<String> list : lists) {
             for (String s : list) {
@@ -87,19 +87,22 @@ public class likou51 {
         return res;
     }
     List<List<String>> res = new ArrayList<>();
-    public void backtrack(char[][] board,int row){
+    //经过修改只找一种解法
+    public boolean backtrack(char[][] board,int row){
        if (row==board.length){
            res.add(arrayList(board));
-           return;
+           return true;
        }
         for (int i = 0; i <board.length ; i++) {
             if (!check(board,row,i)){
                 continue;
             }
             board[row][i]='Q';
-            backtrack(board, row+1);
+            if(backtrack(board, row+1))
+                return true;
             board[row][i]='.';
         }
+        return false;
     }
 
     private boolean check(char[][] board, int row, int col) {
