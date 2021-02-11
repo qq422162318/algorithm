@@ -13,7 +13,7 @@ public class likou752 {
         //        likou752.bfs("1234");
         String[] strings=new String[]{"0201","0101","0102","1212","2002"};
         String target="0202";
-        System.out.println(likou752.openLock2(strings, target));
+        System.out.println(likou752.openLock(strings, target));
     }
     //正确解法(单向bfs)
     public int openLock(String[] deadends, String target) {

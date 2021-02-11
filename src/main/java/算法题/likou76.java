@@ -20,7 +20,7 @@ public class likou76 {
         String S2="ABDDCBACEBANC";
         likou76 likou76 = new likou76();
 
-        String s = likou76.minWindow3(S, T);
+        String s = likou76.minWindow2(S, T);
         System.out.println(s);
     }
     Map<Character, Integer> target = new HashMap<Character, Integer>();
@@ -85,24 +85,29 @@ public class likou76 {
             // 窗口右移
             right++;
             // 更新
-            if (need.get(c) != null) {
+            if (need.containsKey(c)) {
+                //只添加need中有的字符
                 windows.put(c, windows.getOrDefault(c, 0) + 1);
+                //valid 变量表示窗口中满足 need 条件的字符个数，如果 valid 和 need.size 的大小相同，则说明窗口已满足条件，已经完全覆盖了串 T
                 if (windows.get(c).equals(need.get(c))) {
                     valid++;
                 }
             }
+            // 判断左侧窗口是否要收缩
             while(valid == need.size()) {
+                // 在这里更新最小覆盖子串
                 if (right - left < len) {
                     len = right - left;
                     start = left;
                 }
                 char leftChar = s.charAt(left);
                 left++;
-                if (need.get(leftChar) != null) {
-                    windows.put(leftChar, windows.get(leftChar) - 1);
-                    if (windows.get(leftChar) + 1 == need.get(leftChar)) {
+                if (need.containsKey(leftChar)) {
+                    if (windows.get(leftChar) == need.get(leftChar)) {
                         valid--;
                     }
+                    //因为left++滑动窗口将字符串移除
+                    windows.put(leftChar, windows.get(leftChar) - 1);
                 }
             }
         }
