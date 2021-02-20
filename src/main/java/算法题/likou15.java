@@ -2,7 +2,7 @@ package 算法题;
 
 import java.util.Arrays;
 
-public class threeSum {
+public class likou15 {
     public static void main(String[] args) {
         int[] nums = {-1, 2, 1, -4};
         Arrays.sort(nums);
