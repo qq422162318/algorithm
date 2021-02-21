@@ -42,9 +42,9 @@ public class likou18 {
                 int sum = nums[lo] + nums[hi];
                 int left = nums[lo], right = nums[hi];
                 if (sum < target) {
-                    lo++;
+                    while (lo < hi && nums[lo] == left) lo++;
                 } else if (sum > target) {
-                    hi--;
+                    while (lo < hi && nums[hi] == right) hi--;
                 } else {
                     ArrayList<Integer> temp = new ArrayList<>();
                     temp.add(nums[lo]);
