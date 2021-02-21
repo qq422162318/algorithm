@@ -20,14 +20,53 @@ public class likou18 {
     public static void main(String[] args) {
 //        int[] nums = {-4,-3,1, 0, -1,3,4, 0, -2, 2};
         int[] nums = {1, 0, -1, 0, -2, 2};
+        Arrays.sort(nums);
         likou18 likou = new likou18();
-        List<List<Integer>> lists = likou.fourSum(nums, 0);
+//        List<List<Integer>> lists = likou.fourSum(nums, 0);
+        List<List<Integer>> lists = likou.nSum(nums, 4,0,0);
         for (List<Integer> list : lists) {
             for (Integer integer : list) {
                 System.out.print(integer+"\t");
             }
             System.out.println();
         }
+    }
+    public List<List<Integer>> nSum(int[] nums, int n,int start,int target) {
+//        Arrays.sort(nums);
+        int sz = nums.length;
+        List<List<Integer>> res=new ArrayList<>();
+        if (n == 2) {
+            // 双指针那一套操作
+            int lo = start, hi = sz - 1;
+            while (lo < hi) {
+                int sum = nums[lo] + nums[hi];
+                int left = nums[lo], right = nums[hi];
+                if (sum < target) {
+                    lo++;
+                } else if (sum > target) {
+                    hi--;
+                } else {
+                    ArrayList<Integer> temp = new ArrayList<>();
+                    temp.add(nums[lo]);
+                    temp.add(nums[hi]);
+                    res.add(temp);
+                    while (lo < hi && nums[lo] == left) lo++;
+                    while (lo < hi && nums[hi] == right) hi--;
+                }
+            }
+        } else {
+            // n > 2 时，递归计算 (n-1)Sum 的结果
+            for (int i = 0; i < sz; i++) {
+                List<List<Integer>> lists = nSum(nums, n-1,i + 1, target - nums[i]);
+                for (List<Integer> list : lists) {
+                    list.add(nums[i]);
+                    res.add(list);
+                }
+                while (i<sz-1&&nums[i]==nums[i+1])i++;
+            }
+        }
+
+        return res;
     }
     public List<List<Integer>> fourSum(int[] nums, int target) {
         Arrays.sort(nums);
