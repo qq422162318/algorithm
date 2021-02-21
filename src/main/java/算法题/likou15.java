@@ -53,9 +53,9 @@ public class likou15 {
            int left=nums[le],right=nums[ri];
            int sum=left+right;
            if (sum<target){
-               le++;
+               while(le<ri&&left==nums[le])le++;
            }else if (sum>target){
-               ri--;
+               while(le<ri&&right==nums[ri])ri--;
            }else if (sum==target){
                ArrayList<Integer> temp = new ArrayList<>();
                temp.add(nums[le]);

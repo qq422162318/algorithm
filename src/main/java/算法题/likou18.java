@@ -56,7 +56,7 @@ public class likou18 {
             }
         } else {
             // n > 2 时，递归计算 (n-1)Sum 的结果
-            for (int i = 0; i < sz; i++) {
+            for (int i = start; i < sz; i++) {
                 List<List<Integer>> lists = nSum(nums, n-1,i + 1, target - nums[i]);
                 for (List<Integer> list : lists) {
                     list.add(nums[i]);
@@ -103,9 +103,9 @@ public class likou18 {
             int left=nums[le],right=nums[ri];
             int sum=left+right;
             if (sum<target){
-                le++;
+                while(le<ri&&left==nums[le])le++;
             }else if (sum>target){
-                ri--;
+                while(le<ri&&right==nums[ri])ri--;
             }else if (sum==target){
                 ArrayList<Integer> temp = new ArrayList<>();
                 temp.add(nums[le]);
