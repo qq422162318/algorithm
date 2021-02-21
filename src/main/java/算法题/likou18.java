@@ -1,45 +1,81 @@
 package 算法题;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+/**
+ * 18. 四数之和
+ * 给定一个包含 n 个整数的数组 nums 和一个目标值 target，判断 nums 中是否存在四个元素 a，b，c 和 d ，使得 a + b + c + d 的值与 target 相等？找出所有满足条件且不重复的四元组。
+ * 注意：
+ * 答案中不可以包含重复的四元组。
+ * 示例：
+ * 给定数组 nums = [1, 0, -1, 0, -2, 2]，和 target = 0。
+ * 满足要求的四元组集合为：
+ * [
+ *   [-1,  0, 0, 1],
+ *   [-2, -1, 1, 2],
+ *   [-2,  0, 0, 2]
+ * ]
+ */
 public class likou18 {
     public static void main(String[] args) {
-        int[] nums = {-4,-3,1, 0, -1,3,4, 0, -2, 2};
+//        int[] nums = {-4,-3,1, 0, -1,3,4, 0, -2, 2};
+        int[] nums = {1, 0, -1, 0, -2, 2};
+        likou18 likou = new likou18();
+        List<List<Integer>> lists = likou.fourSum(nums, 0);
+        for (List<Integer> list : lists) {
+            for (Integer integer : list) {
+                System.out.print(integer+"\t");
+            }
+            System.out.println();
+        }
+    }
+    public List<List<Integer>> fourSum(int[] nums, int target) {
         Arrays.sort(nums);
-        int len = nums.length-3,target=0;
-        int left,right,ans,response;
-        List<List<Integer>> list=new ArrayList<>();
-        response=nums[0]+nums[1]+nums[2]+nums[3];
-        for (int i = 0; i <len ; i++) {
-            if (i>0&&nums[i]==nums[i-1])continue;
-            for (int j=0;j<nums.length-1;j++) {
-                left = i + 1;
-                right = nums.length - 1;
-                while (left < right) {
-                    ans = nums[i] + nums[left] + nums[left + 1] + nums[right];
-                    if (ans == target) {
-                        if (list.contains(Arrays.asList(nums[i], nums[left], nums[left + 1], nums[right]))){
-                            break ;
-                        }else{
-                            list.add(Arrays.asList(nums[i], nums[left], nums[left + 1], nums[right]));
-                        }
-                    }
-                    if (Math.abs(ans - target) < Math.abs(response - target)) {
-                        response = ans;
-                        System.out.println(response);
-                    }
-                    if (Math.abs(ans - target) > target) {
-                        right--;
-                    } else if (Math.abs(ans - target) < target) {
-                        left++;
-                    } else {
-                        response = ans;
+        int n=nums.length;
+        List<List<Integer>> res=new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            List<List<Integer>> lists = threeSum(nums, i + 1, target - nums[i]);
+            for (List<Integer> list : lists) {
+                list.add(nums[i]);
+                res.add(list);
+            }
+            while (i<n-1&&nums[i]==nums[i+1])i++;
+        }
+        return res;
+    }
+    public List<List<Integer>> threeSum(int[] nums,int start,int target){
 
-                    }
-                }
+        int len = nums.length;
+        List<List<Integer>> res=new ArrayList<>();
+        for (int i = start; i < len; i++) {
+            List<List<Integer>> ress=twoSumTarget(nums,i+1,target-nums[i]);
+            for (List<Integer> re : ress) {
+                re.add(nums[i]);
+                res.add(re);
+            }
+            while (i<len-1&&nums[i]==nums[i+1])i++;
+        }
+        return res;
+    }
+    public List<List<Integer>> twoSumTarget(int[] nums,int start,int target){
+        int le=start,ri=nums.length-1;
+        List<List<Integer>> res=new ArrayList<>();
+        while(le<ri){
+            int left=nums[le],right=nums[ri];
+            int sum=left+right;
+            if (sum<target){
+                le++;
+            }else if (sum>target){
+                ri--;
+            }else if (sum==target){
+                ArrayList<Integer> temp = new ArrayList<>();
+                temp.add(nums[le]);
+                temp.add(nums[ri]);
+                res.add(temp);
+                while(le<ri&&left==nums[le])le++;
+                while(le<ri&&right==nums[ri])ri--;
             }
         }
-        System.out.println(list);
-    }}
+        return res;
+    }
+}
