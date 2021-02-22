@@ -1,4 +1,7 @@
 package 算法题;
+
+import java.util.List;
+
 /**
  * 416. 分割等和子集
  * 给定一个只包含正整数的非空数组。是否可以将这个数组分割成两个子集，使得两个子集的元素和相等。
@@ -16,10 +19,26 @@ package 算法题;
  */
 public class likou416 {
     public static void main(String[] args) {
-
+       int[] nums=new int[]{1,5,11,5};
+        likou416 likou416 = new likou416();
+        System.out.println(likou416.canPartition(nums));
     }
     public boolean canPartition(int[] nums) {
-
-        return false;
+        int sum=0;
+        for (int num : nums) {
+            sum+=num;
+        }
+        if (sum%2!=0)return false;
+        int n=nums.length;
+        sum=sum/2;
+        boolean[] dp=new boolean[sum+1];
+        dp[0]=true;
+        for (int i = 0; i < n; i++) {
+            for (int j = sum; j >=0 ; j--) {
+                if (j-nums[i]>=0)
+                dp[j]=dp[j]||dp[j-nums[i]];
+            }
+        }
+        return dp[sum];
     }
 }
