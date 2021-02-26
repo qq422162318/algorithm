@@ -1,7 +1,7 @@
 package 数据结构.树;
 
 public class RedBlackTree<Key extends Comparable<Key>,Value> {
-   //根节点
+    //根节点
     private Node root;
     //记录树中元素的个数
     private int N;
