@@ -30,12 +30,20 @@ public class likou295 {
          * initialize your data structure here.
          */
         public MedianFinder() {
+            //小顶堆
             large = new PriorityQueue<>();
+            //大顶堆
             small = new PriorityQueue<>((a, b) -> {
                 return b - a;
             });
         }
 
+        /**
+         * 简单说，想要往large里添加元素，不能直接添加，而是要先往small里添加，
+         * 然后再把small的堆顶元素加到large中；
+         * 向small中添加元素同理。
+         * @param num 要添加的数
+         */
         public void addNum(int num) {
             if (small.size() >= large.size()) {
                 small.offer(num);
@@ -47,11 +55,13 @@ public class likou295 {
         }
 
         public double findMedian() {
+            // 如果元素不一样多，多的那个堆的堆顶元素就是中位数
             if (large.size() < small.size()) {
                 return small.peek();
             } else if (large.size() > small.size()) {
                 return large.peek();
             }
+            // 如果元素一样多，两个堆堆顶元素的平均数是中位数
             return (large.peek() + small.peek()) / 2.0;
         }
     }
