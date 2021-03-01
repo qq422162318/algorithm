@@ -10,39 +10,49 @@ import java.util.PriorityQueue;
  * 到 100 范围内，你将如何优化你的算法？ 如果数据流中 99% 的整数都在 0 到 100 范围内，你将如何优化你的算法？
  */
 public class likou295 {
-  public static void main(String[] args) {
-       likou295 likou=new likou295();
-       MedianFinder me=new MedianFinder();
-  }
-
-  class MedianFinder {
-    private PriorityQueue<Integer> large, small;
-
-    /** initialize your data structure here. */
-    public MedianFinder() {
-      large = new PriorityQueue<>();
-      small = new PriorityQueue<>((a, b) -> {
-        return b - a;
-      });
+    public static void main(String[] args) {
+        likou295 likou = new likou295();
+        likou.run();
     }
 
-    public void addNum(int num) {
-      if (small.size() >= large.size()) {
-        small.offer(num);
-        large.offer(small.poll());
-      } else {
-        large.offer(num);
-        small.offer(large.poll());
-      }
+    public void run() {
+        MedianFinder me = new MedianFinder();
+        me.addNum(1);
+        me.addNum(2);
+        System.out.println(me.findMedian());
+
     }
 
-    public double findMedian() {
-      if (large.size() < small.size()) {
-        return small.peek();
-      } else if (large.size() > small.size()) {
-        return large.peek();
-      }
-      return (large.peek() + small.peek()) / 2.0;
+    class MedianFinder {
+        private PriorityQueue<Integer> large, small;
+
+        /**
+         * initialize your data structure here.
+         */
+        public MedianFinder() {
+            large = new PriorityQueue<>();
+            small = new PriorityQueue<>((a, b) -> {
+                return b - a;
+            });
+        }
+
+        public void addNum(int num) {
+            if (small.size() >= large.size()) {
+                small.offer(num);
+                large.offer(small.poll());
+            } else {
+                large.offer(num);
+                small.offer(large.poll());
+            }
+        }
+
+        public double findMedian() {
+            if (large.size() < small.size()) {
+                return small.peek();
+            } else if (large.size() > small.size()) {
+                return large.peek();
+            }
+            return (large.peek() + small.peek()) / 2.0;
+        }
     }
-  }
 }
