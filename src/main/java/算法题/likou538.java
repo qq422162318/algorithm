@@ -1,4 +1,5 @@
 package 算法题;
+
 /**
  * 538. 把二叉搜索树转换为累加树
  * 给出二叉 搜索 树的根节点，该树的节点值各不相同，请你将其转换为累加树（Greater Sum Tree），使每个节点 node 的新值等于原树中大于或等于 node.val 的值之和。
@@ -29,30 +30,39 @@ public class likou538 {
     public static void main(String[] args) {
 
     }
+
     public TreeNode convertBST(TreeNode root) {
         traverse(root);
         return root;
-          
+
     }
-     int sum=0;
+
+    int sum = 0;
+
     private void traverse(TreeNode root) {
-        if(root==null)return;
+        if (root == null) return;
         traverse(root.right);
-        sum+=root.val;
-        root.val=sum;
+        sum += root.val;
+        root.val = sum;
         traverse(root.left);
     }
 
     public class TreeNode {
-             int val;
-             TreeNode left;
-             TreeNode right;
-             TreeNode() {}
-             TreeNode(int val) { this.val = val; }
-             TreeNode(int val, TreeNode left, TreeNode right) {
-                 this.val = val;
-                 this.left = left;
-                 this.right = right;
-             }
-         }
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
 }
