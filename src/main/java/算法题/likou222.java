@@ -20,23 +20,6 @@ public class likou222 {
         TreeNode l = root, r = root;
         // 记录左、右子树的高度
         int hl = 0, hr = 0;
-        public class TreeNode {
-            int val;
-            TreeNode left;
-            TreeNode right;
-
-            TreeNode() {
-            }
-
-            TreeNode(int val) {
-                this.val = val;
-            }
-
-            TreeNode(int val, TreeNode left, TreeNode right) {
-                this.val = val;
-                this.left = left;
-                this.right = right;
-            }
         while (l != null) {
             l = l.left;
             hl++;
