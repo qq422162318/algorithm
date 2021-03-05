@@ -28,8 +28,6 @@ public class likou222 {
             r = r.right;
             hr++;
         }
-        TreeNode() {
-        }
         // 如果左右子树的高度相同，则是一棵满二叉树
         if (hl == hr) {
             return (int) Math.pow(2, hl) -1;
