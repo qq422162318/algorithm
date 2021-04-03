@@ -1,4 +1,9 @@
 package 算法题;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Stack;
+
 /**
  * 496. 下一个更大元素 I
  * 给你两个 没有重复元素 的数组 nums1 和 nums2 ，其中nums1 是 nums2 的子集。
@@ -26,7 +31,58 @@ package 算法题;
  * 进阶：你可以设计一个时间复杂度为 O(nums1.length + nums2.length) 的解决方案吗？
  */
 public class likou496 {
+    public static void main(String[] args) {
+//        int[] nums1={1,3,5,2,4};
+//        int[] nums2={6,5,4,3,2,1,7};
+        int[] nums1={4,1,2};
+        int[] nums2={1,3,4,2};
+        likou496 likou496 = new likou496();
+        int[] x = likou496.nextGreaterElement2(nums1, nums2);
+        for (int i : x) {
+            System.out.println(i);
+        }
+    }
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
-      return null;
+        int index=0;
+        ArrayList<Integer> objects = new ArrayList<>();
+        for (int i = 0; i <nums1.length ; i++) {
+            for (int j = 0; j < nums2.length; j++) {
+                if(nums2[j]==nums1[i]) {
+                    if (j + 1 < nums2.length&& nums2[j + 1] > nums1[i]) {
+                        objects.add(nums2[j + 1]);
+                    } else {
+                        objects.add(-1);
+                    }
+                    break;
+                }
+            }
+        }
+        Integer[] integers = new Integer[objects.size()];
+        Integer[] integers1 = objects.toArray(integers);
+        int[] ints = new int[objects.size()];
+        for (int i = 0; i < objects.size(); i++) {
+            ints[i]=integers1[i];
+        }
+        return ints;
+    }
+    public int[] nextGreaterElement2(int[] nums1, int[] nums2) {
+        Stack<Integer> stack = new Stack<>();
+        HashMap<Integer, Integer> integerIntegerHashMap = new HashMap<>();
+
+        int length = nums1.length;
+        int length1 = nums2.length;
+        for (int i = length1-1; i >=0; i--) {
+            while(!stack.isEmpty()&&stack.peek()<nums2[i]){
+                stack.pop();
+            }
+            if (!stack.isEmpty())
+            integerIntegerHashMap.put(nums2[i],stack.peek());
+            stack.push(nums2[i]);
+        }
+        int[] ints = new int[length];
+        for (int i = 0; i < length; i++) {
+            ints[i]=integerIntegerHashMap.getOrDefault(nums1[i],-1);
+        }
+        return ints;
     }
 }

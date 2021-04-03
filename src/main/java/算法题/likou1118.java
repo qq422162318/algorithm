@@ -1,7 +1,9 @@
 package 算法题;
 
+import java.lang.reflect.Array;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
 
@@ -18,16 +20,18 @@ public class likou1118 {
     }
     public List<Integer> dailyTemperatures(int[] nums){
         int length = nums.length;
-        ArrayList<Integer> res = new ArrayList<>(length);
+        List<Integer> res = new ArrayList<>(length);
         Stack<Integer> stack = new Stack<>();
+        Stack<Integer> temp = new Stack<>();
         //调用单调栈的算法模板
         for (int i = length - 1; i >= 0; i--) {
             while(!stack.isEmpty()&&nums[stack.peek()]<=nums[i]){
                 stack.pop();
             }
-            res.add(stack.empty()?0:(stack.peek()-i));
+            temp.push(stack.empty()?0:(stack.peek()-i));
             stack.push(i);
         }
+        while(!temp.empty())res.add(temp.pop());
         return res;
     }
 }
