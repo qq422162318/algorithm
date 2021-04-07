@@ -1,26 +1,24 @@
 package 算法题;
 
-import java.awt.event.KeyListener;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 
 /**
  * LFU每次淘汰那些使用次数最少的数据
  */
-public class LFUCache {
+public class likou460 {
     public static void main(String[] args) {
-        LFUCache lfuCache = new LFUCache(2);
-        lfuCache.put(1,1);
-        lfuCache.put(2,2);
-        System.out.println(lfuCache.get(1));
-        lfuCache.put(3,3);
-        System.out.println(lfuCache.get(2));
-        System.out.println(lfuCache.get(3));
-        lfuCache.put(4,4);
-        System.out.println(lfuCache.get(1));
-        System.out.println(lfuCache.get(3));
-        System.out.println(lfuCache.get(4));
+        likou460 likou460 = new likou460(2);
+        likou460.put(1,1);
+        likou460.put(2,2);
+        System.out.println(likou460.get(1));
+        likou460.put(3,3);
+        System.out.println(likou460.get(2));
+        System.out.println(likou460.get(3));
+        likou460.put(4,4);
+        System.out.println(likou460.get(1));
+        System.out.println(likou460.get(3));
+        System.out.println(likou460.get(4));
     }
     // key 到 val 的映射，我们后文称为 KV 表
     HashMap<Integer,Integer> keyToVal;
@@ -30,7 +28,7 @@ public class LFUCache {
     HashMap<Integer, LinkedHashSet<Integer>> freqToKeys;
     int minFreq;
     private int cap;
-    public LFUCache(int cap){
+    public likou460(int cap){
       keyToVal=new HashMap<>();
       keyToFreq=new HashMap<>();
       freqToKeys=new HashMap<>();
