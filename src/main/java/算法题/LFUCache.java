@@ -9,6 +9,19 @@ import java.util.LinkedHashSet;
  * LFU每次淘汰那些使用次数最少的数据
  */
 public class LFUCache {
+    public static void main(String[] args) {
+        LFUCache lfuCache = new LFUCache(2);
+        lfuCache.put(1,1);
+        lfuCache.put(2,2);
+        System.out.println(lfuCache.get(1));
+        lfuCache.put(3,3);
+        System.out.println(lfuCache.get(2));
+        System.out.println(lfuCache.get(3));
+        lfuCache.put(4,4);
+        System.out.println(lfuCache.get(1));
+        System.out.println(lfuCache.get(3));
+        System.out.println(lfuCache.get(4));
+    }
     // key 到 val 的映射，我们后文称为 KV 表
     HashMap<Integer,Integer> keyToVal;
     // key 到 freq 的映射，我们后文称为 KF 表
@@ -61,6 +74,10 @@ public class LFUCache {
         keyToVal.put(key,val);
         keyToFreq.put(key,1);
         freqToKeys.putIfAbsent(key,new LinkedHashSet<>());
+        //有之前的点击次数为空导致linkedhashset被清除的情况
+        if(freqToKeys.get(1)==null){
+            freqToKeys.putIfAbsent(1,new LinkedHashSet<>());
+        }
         freqToKeys.get(1).add(key);
         this.minFreq=1;
     }
