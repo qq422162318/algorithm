@@ -3,7 +3,7 @@ package 算法题;
 import javax.jws.soap.SOAPBinding;
 import java.util.*;
 
-public class Twitter {
+public class likou355 {
     private static int timestamp = 0;
 
     private static class Tweet {
