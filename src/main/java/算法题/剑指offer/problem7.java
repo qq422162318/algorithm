@@ -49,7 +49,7 @@ public class problem7 {
         if (root>pre.length-1||left<0||right<0)return null;
         TreeNode node = new TreeNode(pre[root]);
         node.left = build(root + 1, left+inIndex-1, inIndex-1);
-        node.right = build(root+inIndex+1, root+inIndex+1, right);
+        node.right = build(root+inIndex-left+1, root+inIndex-left+1, right);
         return node;
     }
 }
