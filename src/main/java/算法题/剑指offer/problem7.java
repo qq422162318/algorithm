@@ -45,11 +45,12 @@ public class problem7 {
     }
 
     private TreeNode build(int root, int left, int right) {
-        int inIndex = mapIndex.get(pre[root]);
+
         if (root>pre.length-1||left<0||right<0)return null;
+        int inIndex = mapIndex.get(pre[root]);
         TreeNode node = new TreeNode(pre[root]);
-        node.left = build(root + 1, left+inIndex-1, inIndex-1);
-        node.right = build(root+inIndex-left+1, root+inIndex-left+1, right);
+        node.left = build(root + 1, left, inIndex-1);
+        node.right = build(root+inIndex-left+1, inIndex+1, right);
         return node;
     }
 }
