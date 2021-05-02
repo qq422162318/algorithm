@@ -22,6 +22,7 @@ public class problem7 {
         int val;
         TreeNode left;
         TreeNode right;
+
         TreeNode(int x) {
             val = x;
         }
@@ -44,7 +45,7 @@ public class problem7 {
     }
 
     private TreeNode build(int root, int left, int right) {
-        if (left>right) return null;
+        if (left > right) return null;
         int inIndex = mapIndex.get(pre[root]);
         TreeNode node = new TreeNode(pre[root]);
         node.left = build(root + 1, left, inIndex - 1);
