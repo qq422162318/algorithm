@@ -16,60 +16,16 @@ import java.util.Map;
  */
 public class likou76 {
     public static void main(String[] args) {
-        String S = "ADOBECODEBANC", T = "ABC";
-        String S2="ABDDCBACEBANC";
-        likou76 likou76 = new likou76();
+//        String S = "ADOBECODEBANC", T = "ABC";
+        String S = "aa", T = "aa";
 
-        String s = likou76.minWindow2(S, T);
+        likou76 likou76 = new likou76();
+        String s = likou76.minWindow(S, T);
         System.out.println(s);
     }
-    Map<Character, Integer> target = new HashMap<Character, Integer>();
-    Map<Character, Integer> curr = new HashMap<Character, Integer>();
-    public String minWindow(String s,String t){
-        long l1 = System.currentTimeMillis();
-        int tLen = t.length();
-            for (int i = 0; i < tLen; i++) {
-                char c = t.charAt(i);
-                target.put(c, target.getOrDefault(c, 0) + 1);
-            }
-            int l = 0, r = -1;
-            int len = Integer.MAX_VALUE, ansL = -1, ansR = -1;
-            int sLen = s.length();
-            while (r < sLen) {
-                ++r;
-                if (r < sLen && target.containsKey(s.charAt(r))) {
-                    curr.put(s.charAt(r), curr.getOrDefault(s.charAt(r), 0) + 1);
-                }
-                while (check() && l <= r) {
-                    if (r - l + 1 < len) {
-                        len = r - l + 1;
-                        ansL = l;
-                        ansR = l + len;
-                    }
-                    if (target.containsKey(s.charAt(l))) {
-                        curr.put(s.charAt(l), curr.getOrDefault(s.charAt(l), 0) - 1);
-                    }
-                    ++l;
-                }
-            }
-        long l2 = System.currentTimeMillis();
-        System.out.println(l2-l1);
-        return ansL == -1 ? "" : s.substring(ansL, ansR);
-    }
-    public boolean check() {
-        Iterator iter = target.entrySet().iterator();
-        while (iter.hasNext()) {
-            Map.Entry entry = (Map.Entry) iter.next();
-            Character key = (Character) entry.getKey();
-            Integer val = (Integer) entry.getValue();
-            if (curr.getOrDefault(key, 0) < val) {
-                return false;
-            }
-        }
-        return true;
-    }
-    public String minWindow2(String s,String t){
-        if (s == null || s.length() == 0 || t == null || t.length() ==0) {
+
+    public String minWindow(String s, String t) {
+        if (s == null || s.length() == 0 || t == null || t.length() == 0) {
             return "";
         }
         // valid为有效的 len为目标长度
@@ -80,7 +36,7 @@ public class likou76 {
         for (char c : t.toCharArray()) {
             need.put(c, need.getOrDefault(c, 0) + 1);
         }
-        while(right < s.length()) {
+        while (right < s.length()) {
             char c = s.charAt(right);
             // 窗口右移
             right++;
@@ -88,13 +44,14 @@ public class likou76 {
             if (need.containsKey(c)) {
                 //只添加need中有的字符
                 windows.put(c, windows.getOrDefault(c, 0) + 1);
-                //valid 变量表示窗口中满足 need 条件的字符个数，如果 valid 和 need.size 的大小相同，则说明窗口已满足条件，已经完全覆盖了串 T
-                if (windows.get(c).equals(need.get(c))) {
+                //valid 变量表示窗口中满足 need 条件的字符个数，如果 valid 和 need.size 的大小相同，
+                // 则说明窗口已满足条件，已经完全覆盖了串 T
+                if (windows.get(c) == need.get(c)) {
                     valid++;
                 }
             }
-            // 判断左侧窗口是否要收缩
-            while(valid == need.size()) {
+            // 判断左侧窗口是否要收缩 need.size()注意多个重复字母
+            while (valid == need.size()) {
                 // 在这里更新最小覆盖子串
                 if (right - left < len) {
                     len = right - left;
@@ -103,43 +60,15 @@ public class likou76 {
                 char leftChar = s.charAt(left);
                 left++;
                 if (need.containsKey(leftChar)) {
-                    if (windows.get(leftChar) == need.get(leftChar)) {
-                        valid--;
-                    }
                     //因为left++滑动窗口将字符串移除
                     windows.put(leftChar, windows.get(leftChar) - 1);
+                    if (windows.get(leftChar) < need.get(leftChar)) {
+                        valid--;
+                    }
+
                 }
             }
         }
         return (len == Integer.MAX_VALUE ? "" : s.substring(start, start + len));
-    }
-    public String minWindow3(String s,String t){
-        int[] mp = new int[256];
-        for (char c : t.toCharArray())
-            mp[c] += 1;
-        int start = 0, end = 0;
-        int sLen = s.length(), tLen = t.length();
-        int cnt = 0;
-        int res = -1;
-        String ans = "";
-        while (end < sLen) {
-            char c = s.charAt(end);
-            mp[c] -= 1;
-            if (mp[c] >= 0)
-                cnt += 1;
-            while (cnt == tLen) {
-                if (res == -1 || res > end - start + 1) {
-                    ans = s.substring(start, end + 1);
-                    res = end - start + 1;
-                }
-                c = s.charAt(start);
-                mp[c] += 1;
-                if (mp[c] >= 1)
-                    cnt -= 1;
-                start += 1;
-            }
-            end += 1;
-        }
-        return ans;
     }
 }
