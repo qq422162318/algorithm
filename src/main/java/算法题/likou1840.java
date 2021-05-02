@@ -78,7 +78,7 @@ public class likou1840 {
     }
 
     public int maxBuilding2(int n, int[][] r) {
-        if (r == null || r.length == 0)   return n - 1;
+        if (r == null || r.length == 0) return n - 1;
         Arrays.sort(r, Comparator.comparingInt(x -> x[0]));
         int len = r.length;
         for (int i = len - 2; i >= 0; i--) {
@@ -95,7 +95,7 @@ public class likou1840 {
 
     public static void main(String[] args) {
         likou1840 likou1840 = new likou1840();
-        int[][] ints =new int[][]{{2,1},{4,1}};
+        int[][] ints = new int[][]{{2, 1}, {4, 1}};
         int i = likou1840.maxBuilding2(5, ints);
         System.out.println(i);
     }

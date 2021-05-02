@@ -42,19 +42,21 @@ public class likou141 {
         likou141 likou141 = new likou141();
 
     }
-    int pos=0;
+
+    int pos = 0;
+
     public boolean hasCycle(ListNode head) {
-        if (head==null)return false;
-        if (pos<0)return false;
-        ListNode p=head;
-        HashMap<ListNode,Integer> map = new HashMap<>();
-        int index=0;
-        while(p.next!=null){
-            map.put(p,index);
-            if (map.containsKey(p)){
-              return true;
+        if (head == null) return false;
+        if (pos < 0) return false;
+        ListNode p = head;
+        HashMap<ListNode, Integer> map = new HashMap<>();
+        int index = 0;
+        while (p.next != null) {
+            map.put(p, index);
+            if (map.containsKey(p)) {
+                return true;
             }
-            p=p.next;
+            p = p.next;
             index++;
         }
         return false;
