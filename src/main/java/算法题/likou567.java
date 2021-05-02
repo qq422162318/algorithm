@@ -66,10 +66,10 @@ public class likou567 {
                 char left_c = s.charAt(left);
                 left++;
                 if (need.containsKey(left_c)) {
-                    window.put(left_c, window.get(left_c) - 1);
                     if (window.get(left_c) < (need.get(left_c))) {
                         valid--;
                     }
+                    window.put(left_c, window.get(left_c) - 1);
                 }
             }
         }
