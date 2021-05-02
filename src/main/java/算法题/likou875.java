@@ -23,42 +23,43 @@ package 算法题;
 public class likou875 {
     public static void main(String[] args) {
         likou875 likou875 = new likou875();
-        int pile[]={312884470};
+        int pile[] = {312884470};
         System.out.println(likou875.minEatingSpeed(pile, 968709470));
     }
+
     public int minEatingSpeed(int[] piles, int h) {
-        if (piles.length==0)return 0;
-        if (piles.length==1&&piles[0]<h)return 1;
-        int left=0,right=getMax(piles);
-        while(left<right){
-            int mid=left+(right-left)/2;
-            if (canFinish(piles,mid,h)){
-                right=mid;
-            }else{
-                left=mid+1;
+        if (piles.length == 0) return 0;
+        if (piles.length == 1 && piles[0] < h) return 1;
+        int left = 0, right = getMax(piles);
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (canFinish(piles, mid, h)) {
+                right = mid;
+            } else {
+                left = mid + 1;
             }
         }
         return left;
     }
 
-    private boolean canFinish(int[] piles,int speed,int h) {
-        int time=0;
+    private boolean canFinish(int[] piles, int speed, int h) {
+        int time = 0;
         for (int pile : piles) {
-            time+=timeOf(pile,speed);
+            time += timeOf(pile, speed);
         }
-        return time<=h;
+        return time <= h;
     }
 
-    private int timeOf(int pile,int speed) {
-        if (speed==0) return pile;
+    private int timeOf(int pile, int speed) {
+        if (speed == 0) return pile;
 //        return pile%speed==0?pile/speed:pile/speed+1;
-        return (pile/speed)+(pile%speed>0?1:0);
+        return (pile / speed) + (pile % speed > 0 ? 1 : 0);
     }
 
-    private int getMax(int[] n){
-        int max=0;
+    private int getMax(int[] n) {
+        int max = 0;
         for (int i : n) {
-            max=Math.max(i,max);
+            max = Math.max(i, max);
         }
         return max;
     }

@@ -61,6 +61,7 @@ public class likou42 {
 
     /**
      * 双指针 思路
+     *
      * @param nums
      * @return
      */
@@ -73,11 +74,11 @@ public class likou42 {
             l_max = Math.max(l_max, nums[left]);
             r_max = Math.max(r_max, nums[right]);
 
-            if (l_max<r_max){
-                res+=l_max-nums[left];
+            if (l_max < r_max) {
+                res += l_max - nums[left];
                 left++;
-            }else{
-                res+=r_max-nums[right];
+            } else {
+                res += r_max - nums[right];
                 right--;
             }
         }

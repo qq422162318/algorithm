@@ -35,7 +35,7 @@ public class likou739 {
             }
             stack.push(i);
         }
-        int sz=temp.size();
+        int sz = temp.size();
         int[] res = new int[sz];
         for (int i = 0; i < sz; i++) {
             res[i] = temp.pop();

@@ -28,20 +28,24 @@ import java.util.HashSet;
  * pos 为 -1 或者链表中的一个 有效索引 。
  */
 public class likou141 {
-    class ListNode {
-        int val;
-        ListNode next;
+    /**
+     * 经典解法就是用两个指针，一个跑得快，一个跑得慢。
+     * 如果不含有环，跑得快的那个指针最终会遇到 null，说明链表不含环；
+     * 如果含有环，快指针最终会超慢指针一圈，和慢指针相遇，说明链表含有环。
+     */
+    public boolean hasCycle2(ListNode head) {
+        if (head == null) return false;
+        ListNode fast, slow;
+        fast = slow = head;
+        while (fast != null && fast.next != null) {
+            fast = fast.next.next;
+            slow = slow.next;
 
-        ListNode(int x) {
-            val = x;
-            next = null;
+            if (fast == slow) return true;
         }
+        return false;
     }
 
-    public static void main(String[] args) {
-        likou141 likou141 = new likou141();
-
-    }
 
     int pos = 0;
 
@@ -60,5 +64,21 @@ public class likou141 {
             index++;
         }
         return false;
+    }
+
+
+    public static void main(String[] args) {
+        likou141 likou141 = new likou141();
+
+    }
+
+    class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode(int x) {
+            val = x;
+            next = null;
+        }
     }
 }
