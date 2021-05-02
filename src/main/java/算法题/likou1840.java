@@ -1,5 +1,9 @@
 package 算法题;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+
 /**
  * 1840. 最高建筑高度
  * 在一座城市里，你需要建 n 栋新的建筑。这些新的建筑会从 1 到 n 编号排成一列。
@@ -33,12 +37,66 @@ package 算法题;
  * 0 <= maxHeighti <= 109
  */
 public class likou1840 {
-    public int maxBuilding(int n, int[][] restrictions) {
-        int m = restrictions.length;
-        int s = restrictions[0].length;
-        for (int i = 0; i < m; i++) {
-
+    public int maxBuilding(int n, int[][] r) {
+        if (r == null || r.length == 0) return n - 1;
+        Arrays.sort(r, Comparator.comparingInt(x -> x[0]));
+        int len = r.length;
+        boolean flag = false;
+        if (r[len - 1][0] != n) flag = true;
+        int[][] ints;
+        if (flag) {
+            ints = new int[len + 2][r[0].length];
+            ints[0][0] = 1;
+            ints[0][1] = 0;
+            System.arraycopy(r, 0, ints, 1, len);
+            ints[ints.length - 1][0] = n;
+            ints[ints.length - 1][1] = n - 1;
+            r = ints;
+        } else {
+            ints = new int[len + 1][r[0].length];
+            ints[0][0] = 1;
+            ints[0][1] = 0;
+            System.arraycopy(r, 0, ints, 1, len);
+            r = ints;
         }
-        return 0;
+        int m = r.length;
+        // 从左向右传递限制
+        for (int i = 1; i < m; ++i) {
+            r[i][1] = Math.min(r[i][1], r[i - 1][1] + (r[i][0] - r[i - 1][0]));
+        }
+        // 从右向左传递限制
+        for (int i = m - 2; i >= 0; --i) {
+            r[i][1] = Math.min(r[i][1], r[i + 1][1] + (r[i + 1][0] - r[i][0]));
+        }
+        int ans = 0;
+        for (int i = 0; i < m - 1; ++i) {
+            // 计算 r[i][0] 和 r[i][1] 之间的建筑的最大高度
+            int best = ((r[i + 1][0] - r[i][0]) + r[i][1] + r[i + 1][1]) / 2;
+            ans = Math.max(ans, best);
+        }
+        return ans;
+    }
+
+    public int maxBuilding2(int n, int[][] r) {
+        if (r == null || r.length == 0)   return n - 1;
+        Arrays.sort(r, Comparator.comparingInt(x -> x[0]));
+        int len = r.length;
+        for (int i = len - 2; i >= 0; i--) {
+            r[i][1] = Math.min(r[i][1], Math.min(r[i][0] - 1, r[i + 1][1] + r[i + 1][0] - r[i][0]));
+        }
+        int maxHeight = (0 + r[0][1] + r[0][0] - 1) >> 1;
+        for (int i = 1; i <= len - 1; i++) {
+            r[i][1] = Math.min(r[i][1], Math.min(r[i][0] - 1, r[i - 1][1] + r[i][0] - r[i - 1][0]));
+            maxHeight = Math.max(maxHeight, (r[i - 1][1] + r[i][1] + r[i][0] - r[i - 1][0]) >> 1);
+        }
+        maxHeight = Math.max(maxHeight, r[len - 1][1] + n - r[len - 1][0]);
+        return maxHeight;
+    }
+
+    public static void main(String[] args) {
+        likou1840 likou1840 = new likou1840();
+        int[][] ints =new int[][]{{2,1},{4,1}};
+        int i = likou1840.maxBuilding2(5, ints);
+        System.out.println(i);
     }
 }
