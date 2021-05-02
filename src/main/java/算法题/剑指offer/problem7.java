@@ -44,7 +44,7 @@ public class problem7 {
     }
 
     private TreeNode build(int root, int left, int right) {
-        if (root > pre.length - 1 || left < 0 || right < 0) return null;
+        if (left>right) return null;
         int inIndex = mapIndex.get(pre[root]);
         TreeNode node = new TreeNode(pre[root]);
         node.left = build(root + 1, left, inIndex - 1);
