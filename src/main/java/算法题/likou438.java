@@ -127,7 +127,8 @@ public class likou438 {
             res.add(0);
         }
         for (int i = m; i <n ; i++) {
-            sCnt[s.charAt()]
+//            sCnt[s.charAt()]
         }
+        return res;
     }
 }
