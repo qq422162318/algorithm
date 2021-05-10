@@ -1,7 +1,6 @@
 package 算法题;
 
-import java.util.HashMap;
-import java.util.Random;
+import java.util.*;
 
 /**
  * 710. 黑名单中的随机数
@@ -44,33 +43,24 @@ public class likou710 {
 
         int sz = 0;
         HashMap<Integer, Integer> map;
+        Random r;
 
-        public Solution(int N, int[] blacklist) {
-            map=new HashMap<Integer,Integer>();
-            sz = N - blacklist.length;
-            for (int i : blacklist) {
-                map.put(i, 666);
-            }
-            int last = N - 1;
-            for (int i : blacklist) {
-                if (i >= sz) {
-                    continue;
-                }
-                while (map.containsKey(last)) {
-                    last--;
-                }
-                map.put(i, last);
-                last--;
-            }
+        public Solution(int n, int[] b) {
+            map = new HashMap<>();
+            r = new Random();
+            sz = n - b.length;
+            Set<Integer> w = new HashSet<>();
+            for (int i = sz; i < n; i++) w.add(i);
+            for (int x : b) w.remove(x);
+            Iterator<Integer> wi = w.iterator();
+            for (int x : b)
+                if (x < sz)
+                    map.put(x, wi.next());
         }
 
         public int pick() {
-            int i = new Random().nextInt();
-            int index = i % sz;
-            if (map.containsKey(index)) {
-                return map.get(index);
-            }
-            return index;
+            int index = new Random().nextInt(sz);
+            return map.getOrDefault(index, index);
         }
     }
 }
