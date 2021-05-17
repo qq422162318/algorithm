@@ -30,6 +30,7 @@ public class likou83 {
             }
             fast = fast.next;
         }
+        slow.next=null;
         return head;
     }
 
