@@ -1,6 +1,6 @@
 package 算法题;
-
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 710. 黑名单中的随机数
@@ -11,31 +11,26 @@ import java.util.*;
  * 0 <= B.length < min(100000, N)
  * [0, N) 不包含 N，详细参见 interval notation 。
  * 示例 1:
- * <p>
  * 输入:
  * ["Solution","pick","pick","pick"]
  * [[1,[]],[],[],[]]
  * 输出: [null,0,0,0]
  * 示例 2:
- * <p>
  * 输入:
  * ["Solution","pick","pick","pick"]
  * [[2,[]],[],[],[]]
  * 输出: [null,1,1,1]
  * 示例 3:
- * <p>
  * 输入:
  * ["Solution","pick","pick","pick"]
  * [[3,[1]],[],[],[]]
  * Output: [null,0,0,2]
  * 示例 4:
- * <p>
  * 输入:
  * ["Solution","pick","pick","pick"]
  * [[4,[2]],[],[],[]]
  * 输出: [null,1,3,1]
  * 输入语法说明：
- * <p>
  * 输入是两个列表：调用成员函数名和调用的参数。Solution的构造函数有两个参数，N 和黑名单 B。pick 没有参数，输入参数是一个列表，即使参数为空，也会输入一个 [] 空列表。
  */
 public class likou710 {
@@ -43,6 +38,7 @@ public class likou710 {
 
         int sz = 0;
         HashMap<Integer, Integer> map;
+        ConcurrentHashMap<Integer,Integer> mapp;
         Random r;
 
         public Solution(int n, int[] b) {

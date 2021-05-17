@@ -1,4 +1,4 @@
-package com.my;
+package 算法题.剑指offer;
 
 /**
  * 剑指 Offer 10- II. 青蛙跳台阶问题
