@@ -55,7 +55,12 @@ public class likou322 {
         return memo[amount];
     }
 
-    //自底向上
+    /**
+     * dp 自底向上
+     * @param coins 硬币面额数
+     * @param amount 要凑的数
+     * @return
+     */
     public int coinChange2(int[] coins, int amount) {
         memo = new int[amount + 1];
         for (int i = 0; i < memo.length; i++) {
