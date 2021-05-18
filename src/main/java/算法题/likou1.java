@@ -1,6 +1,7 @@
 package 算法题;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * 1. 两数之和
@@ -35,7 +36,6 @@ public class likou1 {
     public int[] twoSum(int[] nums, int target) {
         Arrays.sort(nums);
         int left=0,right=nums.length-1;
-        int[] res=new int[right+1];
         int index=0;
         while(left<right){
             int num=nums[left]+nums[right];
@@ -44,35 +44,23 @@ public class likou1 {
             }else if (num>target){
                 right--;
             }else if (num==target){
-                res[0]=left;
-                res[1]=right;
-                return res;
+                return new int[]{left,right};
             }
         }
-        return res;
+        return new int[]{-1,-1};
     }
-    public int[][] twoSum2(int[] nums, int target) {
-        Arrays.sort(nums);
-        int left=0,right=nums.length-1;
-        int[][] res=new int[right+1][];
-        int index=0;
-        while(left<right){
-            int le=nums[left],ri=nums[right];
-            int num=nums[left]+nums[right];
-            if (num<target){
-//                while (left<right&&nums[left]==le)left++;
-                left++;
-            }else if (num>target){
-//                while (left<right&&nums[right]==ri)right--;
-                right--;
-            }else if (num==target){
-                res[index][0]=nums[left];
-                res[index][1]=nums[right];
-                while (left<right&&nums[left]==le)left++;
-                while (left<right&&nums[right]==ri)right--;
-                ++index;
+    public int[] twoSum2(int[] nums, int target) {
+        int n=nums.length;
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < n; i++) {
+            map.put(nums[i],i);
+        }
+        for (int i = 0; i < n; i++) {
+            int other=target-nums[i];
+            if (map.containsKey(other)&&map.get(other)!=i){
+                return new int[]{i,map.get(other)};
             }
         }
-        return Arrays.copyOf(res,index);
+        return new int[]{-1,-1};
     }
 }
