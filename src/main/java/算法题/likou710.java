@@ -1,6 +1,5 @@
 package 算法题;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * 710. 黑名单中的随机数
@@ -38,7 +37,6 @@ public class likou710 {
 
         int sz = 0;
         HashMap<Integer, Integer> map;
-        ConcurrentHashMap<Integer,Integer> mapp;
         Random r;
 
         public Solution(int n, int[] b) {
