@@ -30,7 +30,16 @@ public class likou83 {
             }
             fast = fast.next;
         }
-        slow.next=null;
+        slow.next = null;
+        return head;
+    }
+
+    public ListNode deleteDuplicates3(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        head.next = deleteDuplicates3(head.next);
+        if (head.val == head.next.val) head = head.next;
         return head;
     }
 
@@ -48,6 +57,4 @@ public class likou83 {
             return head;
         }
     }
-
-
 }
