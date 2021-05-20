@@ -27,12 +27,10 @@ package 算法题;
 public class likou72 {
     public static void main(String[] args) {
         String s1 = "horse", s2 = "ros";
-        int i = minDistance(s1, s2);
-        System.out.println(i);
-        System.out.println(new likou72().minDistance2(s1, s2));
+        System.out.println(new likou72().minDistance(s1, s2));
     }
 
-    public static int minDistance(String word1, String word2) {
+    public int minDistance(String word1, String word2) {
         int m = word1.length();
         int n = word2.length();
         if (m * n == 0) {
@@ -47,23 +45,21 @@ public class likou72 {
         }
         for (int i = 1; i < m + 1; i++) {
             for (int j = 1; j < n + 1; j++) {
-                int up = dp[i - 1][j] + 1;
-                int left = dp[i][j - 1] + 1;
-                int left_up = dp[i - 1][j - 1];
-                if (word1.charAt(i - 1) != word2.charAt(j - 1)) {
-                    left_up += 1;
-                }
-                dp[i][j] = Math.min(up, Math.min(left, left_up));
+                if (word1.charAt(i - 1) == word2.charAt(j - 1))
+                    dp[i][j] = dp[i - 1][j - 1];
+                else
+                    dp[i][j] = Math.min(dp[i - 1][j] + 1, Math.min(dp[i][j - 1] + 1, dp[i - 1][j - 1] + 1));
             }
         }
         return dp[m][n];
     }
 
-    static char[] s1 = null;
-    static char[] s2 = null;
+    char[] s1 = null;
+    char[] s2 = null;
 
     /**
      * 有重叠子问题(不建议)
+     *
      * @param word1
      * @param word2
      * @return
