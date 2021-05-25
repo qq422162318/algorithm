@@ -45,11 +45,11 @@ public class likou494 {
                 result++;
             return;
         }
-
+        //选中-
         target += nums[i];
         backTrack(nums, i + 1, target);
         target -= nums[i];
-
+        //选中+
         target -= nums[i];
         backTrack(nums, i + 1, target);
         target += nums[i];
