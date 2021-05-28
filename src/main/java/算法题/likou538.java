@@ -34,7 +34,6 @@ public class likou538 {
     public TreeNode convertBST(TreeNode root) {
         traverse(root);
         return root;
-
     }
 
     int sum = 0;
