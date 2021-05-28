@@ -1,7 +1,5 @@
 package java设计模式.装饰者模式;
 
-import javafx.beans.property.LongPropertyBase;
-
 public class CoffeeClient {
     public static void main(String[] args) {
         LongBlack longBlack = new LongBlack();
