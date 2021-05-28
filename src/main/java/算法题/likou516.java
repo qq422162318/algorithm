@@ -29,7 +29,6 @@ public class likou516 {
 
     /**
      * dp 数组的定义是：在子串s[i..j]中，最长回文子序列的长度为dp[i][j]
-     *
      * @param s
      * @return
      */
