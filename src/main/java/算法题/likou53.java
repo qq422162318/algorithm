@@ -14,7 +14,7 @@ public class likou53 {
     public static void main(String[] args) {
         int[] nums={-1,1,-3,4,-1,2,1,-5,4};
         likou53 likou53 = new likou53();
-        int i = likou53.maxSubArray(nums);
+        int i = likou53.maxSubArray2(nums);
         System.out.println(i);
     }
     public int maxSubArray(int[] nums) {
@@ -23,12 +23,23 @@ public class likou53 {
         for(int i=1;i<nums.length;i++){
             if(nums[i-1]>0){
                 nums[i]+=nums[i-1];
-
             }else{
                 nums[i]=nums[i];
             }
             max=Math.max(nums[i],max);
         }
         return max;
+    }
+    public int maxSubArray2(int[] nums){
+        if (nums.length==0)return 0;
+        int n=nums.length;
+        int[] dp=new int[n];
+        dp[0]=nums[0];
+        int res=dp[0];
+        for (int i = 1; i < n; i++) {
+            dp[i]=Math.max(nums[i],nums[i]+dp[i-1]);
+            res=Math.max(res,dp[i]);
+        }
+        return res;
     }
 }
