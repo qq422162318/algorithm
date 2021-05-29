@@ -26,7 +26,7 @@ public class dpBagProblem {
                if (j-wt[i-1]<0)
                    dp[i][j]=dp[i-1][j];
                else
-                dp[i][j]=Math.max(dp[i-1][j],dp[i-1][j-wt[i-1]]+val[i-1]);
+                   dp[i][j]=Math.max(dp[i-1][j],dp[i-1][j-wt[i-1]]+val[i-1]);
             }
         }
         return dp[n][weight];
