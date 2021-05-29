@@ -19,24 +19,50 @@ import java.util.List;
  */
 public class likou416 {
     public static void main(String[] args) {
-       int[] nums=new int[]{1,5,11,5};
+        int[] nums = new int[]{1, 5, 11, 5};
         likou416 likou416 = new likou416();
         System.out.println(likou416.canPartition(nums));
     }
+
     public boolean canPartition(int[] nums) {
-        int sum=0;
+        if (nums.length == 0) return false;
+        int sum = 0;
         for (int num : nums) {
-            sum+=num;
+            sum += num;
         }
-        if (sum%2!=0)return false;
-        int n=nums.length;
-        sum=sum/2;
-        boolean[] dp=new boolean[sum+1];
-        dp[0]=true;
+        if (sum % 2 != 0) return false;
+        int n = nums.length;
+        sum = sum / 2;
+        boolean[][] dp = new boolean[n + 1][sum + 1];
+        for (int i = 0; i <= n; i++) {
+            dp[i][0] = true;
+        }
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= sum; j++) {
+                if (j - nums[i - 1] < 0)
+                    dp[i][j] = dp[i - 1][j];
+                else
+                    dp[i][j] = dp[i - 1][j] || dp[i - 1][j - nums[i - 1]];
+            }
+        }
+        return dp[n][sum];
+    }
+
+    public boolean canPartition2(int[] nums) {
+        if (nums.length == 0) return false;
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        if (sum % 2 != 0) return false;
+        int n = nums.length;
+        sum = sum / 2;
+        boolean[] dp = new boolean[sum + 1];
+        dp[0] = true;
         for (int i = 0; i < n; i++) {
-            for (int j = sum; j >=0 ; j--) {
-                if (j-nums[i]>=0)
-                dp[j]=dp[j]||dp[j-nums[i]];
+            for (int j = sum; j >= 0; j--) {
+                if (j - nums[i] >= 0)
+                    dp[j] = dp[j] || dp[j - nums[i]];
             }
         }
         return dp[sum];
