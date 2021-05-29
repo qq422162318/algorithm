@@ -1,5 +1,7 @@
 package 算法题;
 
+import java.util.Arrays;
+
 /**
  * 435. 无重叠区间
  * 给定一个区间的集合，找到需要移除区间的最小数量，使剩余区间互不重叠。
@@ -21,6 +23,18 @@ package 算法题;
  */
 public class likou435 {
     public int eraseOverlapIntervals(int[][] intervals) {
-
+        if (intervals.length == 0) return 0;
+        int n = intervals.length;
+        Arrays.sort(intervals, (x, y) -> x[1] - y[1]);
+        int count = 1;
+        int top_end = intervals[0][1];
+        for (int[] interval : intervals) {
+            int start = interval[0];
+            if (start >= top_end) {
+                count++;
+                top_end = interval[1];
+            }
+        }
+        return n-count;
     }
 }
