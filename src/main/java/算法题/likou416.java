@@ -48,6 +48,11 @@ public class likou416 {
         return dp[n][sum];
     }
 
+    /**
+     * dp状态压缩（二维变一维）
+     * @param nums
+     * @return
+     */
     public boolean canPartition2(int[] nums) {
         if (nums.length == 0) return false;
         int sum = 0;
