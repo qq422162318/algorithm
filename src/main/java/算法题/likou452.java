@@ -2,6 +2,7 @@ package 算法题;
 
 import net.sf.cglib.core.Local;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -32,8 +33,32 @@ import java.util.PriorityQueue;
  * -231 <= xstart < xend <= 231 - 1
  */
 public class likou452 {
-    public int findMinArrowShots(int[][] points) {
+    public static void main(String[] args) {
+        int[][] ss = {
+                {-2147483646, -2147483645},
+                {2147483646, 2147483647}
+        };
+        likou452 likou452 = new likou452();
+        System.out.println(likou452.findMinArrowShots(ss));
+    }
 
-         return 0;
+    public int findMinArrowShots(int[][] points) {
+        if (points.length == 0) return 0;
+        Arrays.sort(points, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] a, int[] b) {
+                return Integer.compare(a[1],b[1]);
+            }
+        });
+        int tmp = points[0][1];
+        int count = 1;
+        for (int[] point : points) {
+            int start = point[0];
+            if (start > tmp) {
+                count++;
+                tmp = point[1];
+            }
+        }
+        return count;
     }
 }
