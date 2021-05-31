@@ -34,6 +34,6 @@ import java.util.PriorityQueue;
 public class likou452 {
     public int findMinArrowShots(int[][] points) {
 
-
+         return 0;
     }
 }

@@ -16,6 +16,16 @@ import java.util.PriorityQueue;
  * 返回 4 。
  */
 public class likou407 {
+    public static void main(String[] args) {
+        int[][] dd = new int[][]{
+                {1, 4, 3, 1, 3, 2},
+                {3, 2, 1, 3, 2, 4},
+                {2, 3, 3, 2, 3, 1}
+        };
+        likou407 likou407 = new likou407();
+        System.out.println(likou407.trapRainWater(dd));
+    }
+
     int m, n;
 
     public int trapRainWater(int[][] heightMap) {
@@ -35,14 +45,14 @@ public class likou407 {
         }
         int res = 0;
         int[] pos = new int[]{0, -1, 0, 1, 0};
-        while (!pq.isEmpty()) {
+        while (pq.size() > 0) {
             int[] top = pq.poll();
             for (int i = 0; i < 4; i++) {
                 int newX = top[0] + pos[i], newY = top[1] + pos[i + 1];
-                if (!visited[newX][newY] && inRange(newX, newY)) {
-                    if (heightMap[newX][newY] > top[2]) {
-                        res += heightMap[newX][newY];
-                        visited[newX][newY]=true;
+                if (inRange(newX, newY) && !visited[newX][newY]) {
+                    visited[newX][newY] = true;
+                    if (heightMap[newX][newY] < top[2]) {
+                        res += top[2] - heightMap[newX][newY];
                     }
                     pq.offer(new int[]{newX, newY, Math.max(heightMap[newX][newY], top[2])});
                 }
