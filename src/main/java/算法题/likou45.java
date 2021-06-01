@@ -37,6 +37,7 @@ public class likou45 {
     public int jummp2(int[] nums) {
         int n = nums.length;
         memo = new int[n];
+        Arrays.fill(memo,n);
         return dp(nums, 0);
     }
     private int dp(int[] nums, int p) {
