@@ -17,7 +17,7 @@ package 算法题;
 public class likou55 {
     public static void main(String[] args) {
         likou55 likou55 = new likou55();
-        int[] nums = {2,3,1,1,4};
+        int[] nums = {2, 3, 1, 1, 4};
         boolean b = likou55.canJump2(nums);
         System.out.println(b);
     }
