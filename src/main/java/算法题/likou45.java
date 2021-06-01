@@ -16,35 +16,38 @@ package 算法题;
 public class likou45 {
     public static void main(String[] args) {
         int[] nums = {2, 3, 1, 1, 4};
-        int findlargefoot = jummp(nums);
+        likou45 likou45 = new likou45();
+        int findlargefoot = likou45.jummp(nums);
         System.out.println(findlargefoot);
     }
 
-    public static int findlargefoot(int[] nums) {
-        if (nums.length == 1) return 0;
-        int reach = 0;
-        int nextReach = nums[0];
-        int step = 0;
-        for (int i = 0; i < nums.length - 1; i++) {
-            nextReach = Math.max(i + nums[i], nextReach);
-            if (nextReach >= nums.length - 1) return (step + 1);
-            if (i == reach) {
-                step++;
-                reach = nextReach;
-            }
-        }
-        return step;
-    }
-
-    public static int jummp(int[] nums) {
-        int length = nums.length, end = 0, maxPosition = 0, steps = 0;
-        for (int i = 0; i < length - 1; i++) {
-            maxPosition = Math.max(maxPosition, i + nums[i]);
-            if (i == end) {
-                end = maxPosition;
+    public int jummp(int[] nums) {
+        int n = nums.length, end = 0, far = 0, steps = 0;
+        for (int i = 0; i < n-1; i++) {
+            far=Math.max(nums[i]+i,far);
+            if (end==i){
                 steps++;
+                end=far;
             }
         }
         return steps;
+    }
+
+    int[] memo;
+    public int jummp2(int[] nums) {
+        int n = nums.length;
+        memo = new int[n];
+        return dp(nums, 0);
+    }
+    private int dp(int[] nums, int p) {
+        int n = nums.length;
+        if (p >= n - 1) return 0;
+        if (memo[p] != n) return memo[p];
+        int steps = nums[p];
+        for (int i = 1; i <= steps; i++) {
+            int subProblem=dp(nums, p+i);
+            memo[p]=Math.min(memo[p],subProblem+1);
+        }
+        return memo[p];
     }
 }
