@@ -39,7 +39,7 @@ public class likou174 {
                 dungeon[i][j]=dungeon[i][j]+threat>0?0:dungeon[i][j]+threat;
             }
         }
-        return -dungeon[0][0]+1;
+        return dungeon[0][0]<0?-dungeon[0][0]+1:1;
     }
 
     int[][] memo;
