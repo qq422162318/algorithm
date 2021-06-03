@@ -22,33 +22,34 @@ import java.util.Arrays;
 public class likou174 {
     public static void main(String[] args) {
         likou174 likou = new likou174();
-        int[][] nm={
-                {-2,-3,3},
-                {-5,-10,1},
-                {10,30,-5}
+        int[][] nm = {
+                {-2, -3, 3},
+                {-5, -10, 1},
+                {10, 30, -5}
         };
-        System.out.println(likou.calculateMinimumHP2(nm));
+        System.out.println(likou.calculateMinimumHP(nm));
     }
+
     public int calculateMinimumHP(int[][] dungeon) {
         if (dungeon.length == 0) return 0;
         int m = dungeon.length;
         int n = dungeon[0].length;
-        dungeon[m - 1][n - 1] = dungeon[m - 1][n - 1] > 0 ? 0 : dungeon[m - 1][n - 1];
-        for (int i = n - 2; i > 0; i--) {
+        if (dungeon[m - 1][n - 1] > 0) dungeon[m - 1][n - 1] = 0;
+        for (int i = n - 2; i >= 0; i--) {
             dungeon[m - 1][i] += dungeon[m - 1][i + 1];
             dungeon[m - 1][i] = dungeon[m - 1][i] > 0 ? 0 : dungeon[m - 1][i];
         }
-        for (int i = m - 2; i > 0; i--) {
+        for (int i = m - 2; i >= 0; i--) {
             dungeon[i][n - 1] += dungeon[i + 1][n - 1];
             dungeon[i][n - 1] = dungeon[i][n - 1] > 0 ? 0 : dungeon[i][n - 1];
         }
         for (int i = m - 2; i >= 0; i--) {
             for (int j = n - 2; j >= 0; j--) {
-                int threat=Math.max(dungeon[i+1][j],dungeon[i][j+1]);
-                dungeon[i][j]=dungeon[i][j]+threat>0?0:dungeon[i][j]+threat;
+                int threat = Math.max(dungeon[i + 1][j], dungeon[i][j + 1]);
+                dungeon[i][j] = dungeon[i][j] + threat > 0 ? 0 : dungeon[i][j] + threat;
             }
         }
-        return dungeon[0][0]<0?-dungeon[0][0]+1:1;
+        return dungeon[0][0] < 0 ? -dungeon[0][0] + 1 : 1;
     }
 
     int[][] memo;
@@ -79,6 +80,13 @@ public class likou174 {
         int dp[][] = new int[m + 1][n + 1];
         for (int[] ints : dp) {
             Arrays.fill(ints, Integer.MAX_VALUE);
+        }
+        dp[m][n - 1] = dp[m - 1][n] = 1;
+        for (int i = m - 1; i >= 0; i--) {
+            for (int j = n - 1; j >= 0; j--) {
+                int min = Math.min(dp[i + 1][j], dp[i][j + 1]);
+                dp[i][j] = Math.max(min - dungeon[i][j], 1);
+            }
         }
         return dp[0][0];
     }
