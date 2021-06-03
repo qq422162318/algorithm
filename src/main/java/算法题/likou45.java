@@ -1,5 +1,7 @@
 package 算法题;
 
+import java.util.Arrays;
+
 /**
  * 45. 跳跃游戏 II
  * 给定一个非负整数数组，你最初位于数组的第一个位置。
@@ -37,6 +39,7 @@ public class likou45 {
     public int jummp2(int[] nums) {
         int n = nums.length;
         memo = new int[n];
+        Arrays.fill(memo,n);
         return dp(nums, 0);
     }
     private int dp(int[] nums, int p) {
