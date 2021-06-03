@@ -20,6 +20,15 @@ import java.util.Arrays;
  * 任何房间都可能对骑士的健康点数造成威胁，也可能增加骑士的健康点数，包括骑士进入的左上角房间以及公主被监禁的右下角房间。
  */
 public class likou174 {
+    public static void main(String[] args) {
+        likou174 likou = new likou174();
+        int[][] nm={
+                {-2,-3,3},
+                {-5,-10,1},
+                {10,30,-5}
+        };
+        System.out.println(likou.calculateMinimumHP2(nm));
+    }
     public int calculateMinimumHP(int[][] dungeon) {
         if (dungeon.length == 0) return 0;
         int m = dungeon.length;
