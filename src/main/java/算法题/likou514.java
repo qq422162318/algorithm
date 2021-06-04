@@ -1,6 +1,7 @@
 package 算法题;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -26,6 +27,12 @@ import java.util.Set;
  * 字符串 key 一定可以由字符串 ring 旋转拼出。
  */
 public class likou514 {
+    public static void main(String[] args) {
+        String ring = "ababcab", key = "acbaacba";
+        likou514 likou = new likou514();
+        System.out.println(likou.findRotateSteps(ring, key));
+    }
+
     public int findRotateSteps(String ring, String key) {
         if (ring.length() == 0 || key.length() == 0) return 0;
         int m = ring.length(), n = key.length();
@@ -49,11 +56,13 @@ public class likou514 {
         if (memo[i][j] != 0) return memo[i][j];
         int n = ring.length();
         int res = Integer.MAX_VALUE;
-        for (int k : index.get(key.charAt(i))) {
-            int delta=Math.abs(k-i);
-            delta=Math.min(delta,n-k);
-            int subProblem=dp(ring, i, key, j+1);
-            res=Math.min()
+        for (int k : index.get(key.charAt(j))) {
+            int delta = Math.abs(k - i);
+            delta = Math.min(delta, n - delta);
+            int subProblem = dp(ring, k, key, j + 1);
+            res = Math.min(res, 1 + delta + subProblem);
         }
+        memo[i][j] = res;
+        return res;
     }
 }
