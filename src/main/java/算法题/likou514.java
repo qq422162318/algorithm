@@ -1,5 +1,9 @@
 package 算法题;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+
 /**
  * 514. 自由之路
  * 电子游戏“辐射4”中，任务“通向自由”要求玩家到达名为“Freedom Trail Ring”的金属表盘，并使用表盘拼写特定关键词才能开门。
@@ -12,10 +16,10 @@ package 算法题;
  * 输入: ring = "godding", key = "gd"
  * 输出: 4
  * 解释:
- *  对于 key 的第一个字符 'g'，已经在正确的位置, 我们只需要1步来拼写这个字符。
- *  对于 key 的第二个字符 'd'，我们需要逆时针旋转 ring "godding" 2步使它变成 "ddinggo"。
- *  当然, 我们还需要1步进行拼写。
- *  因此最终的输出是 4。
+ * 对于 key 的第一个字符 'g'，已经在正确的位置, 我们只需要1步来拼写这个字符。
+ * 对于 key 的第二个字符 'd'，我们需要逆时针旋转 ring "godding" 2步使它变成 "ddinggo"。
+ * 当然, 我们还需要1步进行拼写。
+ * 因此最终的输出是 4。
  * 提示：
  * ring 和 key 的字符串长度取值范围均为 1 至 100；
  * 两个字符串中都只有小写字符，并且均可能存在重复字符；
@@ -23,6 +27,33 @@ package 算法题;
  */
 public class likou514 {
     public int findRotateSteps(String ring, String key) {
-       
+        if (ring.length() == 0 || key.length() == 0) return 0;
+        int m = ring.length(), n = key.length();
+        memo = new int[m][n];
+        index = new HashMap<>();
+        for (int i = 0; i < m; i++) {
+            char c = ring.charAt(i);
+            ArrayList<Integer> list = index.get(c);
+            if (list == null) list = new ArrayList<>();
+            list.add(i);
+            index.put(c, list);
+        }
+        return dp(ring, 0, key, 0);
+    }
+
+    HashMap<Character, ArrayList<Integer>> index;
+    int[][] memo;
+
+    int dp(String ring, int i, String key, int j) {
+        if (j == key.length()) return 0;
+        if (memo[i][j] != 0) return memo[i][j];
+        int n = ring.length();
+        int res = Integer.MAX_VALUE;
+        for (int k : index.get(key.charAt(i))) {
+            int delta=Math.abs(k-i);
+            delta=Math.min(delta,n-k);
+            int subProblem=dp(ring, i, key, j+1);
+            res=Math.min()
+        }
     }
 }
