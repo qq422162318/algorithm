@@ -33,7 +33,31 @@ package 算法题;
  * 保证每次出现字符 * 时，前面都匹配到有效的字符
  */
 public class likou10 {
-    public boolean isMatch(String s, String p) {
+    boolean[][] memo;
+    boolean[][] flag;
 
+    public boolean isMatch(String s, String p) {
+        if (s.length() == 0 || p.length() == 0) return false;
+        int m = s.length(), n = p.length();
+        memo = new boolean[m][n];
+        flag = new boolean[m][n];
+        return dp(s, p, 0, 0);
+    }
+
+    private boolean dp(String s, String p, int i, int j) {
+        if (flag[i][j] == true) return memo[i][j];
+        if (j == p.length()) return i == s.length();
+        boolean first_match = false;
+        if (i < s.length() && (p.charAt(j) == s.charAt(i) || p.charAt(j) == '.'))
+            first_match = true;
+        boolean ans = false;
+        if (p.length() >= 2 && p.charAt(j) == '*')
+            ans = dp(s, p, i, j + 2)
+                    || (first_match & dp(s, p, i + 1, j));
+        else
+            ans = first_match & dp(s, p, i + 1, j + 1);
+        memo[i][j] = ans;
+        flag[i][j] = true;
+        return memo[i][j];
     }
 }
