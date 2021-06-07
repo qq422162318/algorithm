@@ -33,31 +33,39 @@ package 算法题;
  * 保证每次出现字符 * 时，前面都匹配到有效的字符
  */
 public class likou10 {
-    boolean[][] memo;
-    boolean[][] flag;
-
-    public boolean isMatch(String s, String p) {
-        if (s.length() == 0 || p.length() == 0) return false;
-        int m = s.length(), n = p.length();
-        memo = new boolean[m][n];
-        flag = new boolean[m][n];
-        return dp(s, p, 0, 0);
+    public static void main(String[] args) {
+        String s = "ab", p = ".*";
+        likou10 likou10 = new likou10();
+        System.out.println(likou10.isMatch(s, p));
     }
 
-    private boolean dp(String s, String p, int i, int j) {
-        if (flag[i][j] == true) return memo[i][j];
-        if (j == p.length()) return i == s.length();
-        boolean first_match = false;
-        if (i < s.length() && (p.charAt(j) == s.charAt(i) || p.charAt(j) == '.'))
-            first_match = true;
-        boolean ans = false;
-        if (p.length() >= 2 && p.charAt(j) == '*')
-            ans = dp(s, p, i, j + 2)
-                    || (first_match & dp(s, p, i + 1, j));
-        else
-            ans = first_match & dp(s, p, i + 1, j + 1);
-        memo[i][j] = ans;
-        flag[i][j] = true;
-        return memo[i][j];
+    /**
+     * 用 f[i][j]f[i][j] 表示 ss 的前 ii 个字符与 pp 中的前 jj 个字符是否能够匹配。
+     * 在进行状态转移时，我们考虑 pp 的第 jj 个字符的匹配情况：
+     */
+    public boolean isMatch(String s, String p) {
+        if (s.length() == 0 && p.length() == 0) return true;
+        int m = s.length(), n = p.length();
+        boolean[][] dp = new boolean[m + 1][n + 1];
+        dp[0][0] = true;
+        for (int i = 0; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (p.charAt(j - 1) == '*') {
+                    dp[i][j] = dp[i][j - 2];
+                    if (match(s, p, i, j - 1))
+                        dp[i][j] = dp[i - 1][j] || dp[i][j - 2];
+                } else {
+                    if (match(s, p, i, j))
+                        dp[i][j] = dp[i - 1][j - 1];
+                }
+            }
+        }
+        return dp[m][n];
+    }
+
+    private boolean match(String s, String p, int i, int j) {
+        if (i == 0) return false;
+        if (p.charAt(j - 1) == '.') return true;
+        return s.charAt(i - 1) == p.charAt(j - 1);
     }
 }
