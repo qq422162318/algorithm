@@ -1,5 +1,7 @@
 package 算法题;
 
+import java.util.Arrays;
+
 /**
  * 887. 鸡蛋掉落
  * 给你 k 枚相同的鸡蛋，并可以使用一栋从第 1 层到第 n 层共有 n 层楼的建筑。
@@ -25,7 +27,42 @@ package 算法题;
  * 1 <= n <= 104
  */
 public class likou887 {
+    public static void main(String[] args) {
+        likou887 likou = new likou887();
+        System.out.println(likou.superEggDrop(6, 2000));
+    }
     public int superEggDrop(int k, int n) {
+        int[][] dp=new int[k+1][n+1];
+        int m=0;
+        for (;dp[k][m]<n;){
+            m++;
+            for (int K = 1; K <=k ; K++) {
+                dp[K][m]=1+dp[K-1][m-1]+dp[K][m-1];
+            }
+        }
+        return m;
+    }
 
+    int[][] memo;
+
+    public int superEggDrop2(int k, int n) {
+        if (k == 1) return n;
+        memo = new int[k + 1][n + 1];
+        for (int[] ints : memo) {
+            Arrays.fill(ints, -1);
+        }
+        return dp(k, n);
+    }
+
+    private int dp(int k, int n) {
+        if (k == 1) return n;
+        if (n == 0) return 0;
+        if (memo[k][n] != -1) return memo[k][n];
+        int res = Integer.MAX_VALUE;
+        for (int i = 1; i <= n; i++) {
+            res = Math.min(res, Math.max(dp(k, n - i), dp(k - 1, i - 1)) + 1);
+        }
+        memo[k][n] = res;
+        return res;
     }
 }
