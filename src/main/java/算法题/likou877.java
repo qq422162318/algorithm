@@ -18,6 +18,11 @@ package 算法题;
  * 这表明，取前 5 颗石子对亚历克斯来说是一个胜利的举动，所以我们返回 true 。
  */
 public class likou877 {
+    public static void main(String[] args) {
+        int[] p={7,8,8,10};
+        likou877 likou = new likou877();
+        System.out.println(likou.stoneGame(p));
+    }
     /**
      * dp[i][j][0] 对于 piles[i...j] 这部分石头堆，先手能获得的最高分数
      * dp[i][j][1] 对于 piles[i...j] 这部分石头堆，后手能获得的最高分数
@@ -37,11 +42,11 @@ public class likou877 {
             dp[i][i][1] = 0;
         }
         for (int tmp = 1; tmp < n; tmp++) {
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n-tmp; i++) {
                 int j=i+tmp;
-                if (j<=n-1){
+
                     int left=piles[i]+dp[i+1][j][1];
-                    int right=piles[i]+dp[i][j-1][1];
+                    int right=piles[j]+dp[i][j-1][1];
                     if (left>right){
                         dp[i][j][0]=left;
                         dp[i][j][1]=dp[i+1][j][0];
@@ -49,7 +54,7 @@ public class likou877 {
                         dp[i][j][0]=right;
                         dp[i][j][1]=dp[i][j-1][0];
                     }
-                }
+
             }
         }
         int res=dp[0][n-1][0];
