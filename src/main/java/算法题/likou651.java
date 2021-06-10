@@ -22,9 +22,22 @@ package 算法题;
  * A，A，A，Ctrl A，Ctrl C，Ctrl V，Ctrl V
  */
 public class likou651 {
+    public static void main(String[] args) {
+        likou651 likou = new likou651();
+        System.out.println(likou.maxA(7));
+    }
     public int maxA(int N) {
-
-
-        return 0;
+        if (N==0) return 0;
+        return dp(N,0,0);
+    }
+    private int dp(int n, int a_num, int copy) {
+        if (n<=0) return a_num;
+        return max(
+                dp(n-1, a_num+1, copy),
+                dp(n-1, a_num+copy, copy),dp(n-2, a_num, a_num)
+        );
+    }
+    private int max(int dp, int dp1, int dp2) {
+        return Math.max(dp,Math.max(dp1,dp2));
     }
 }
