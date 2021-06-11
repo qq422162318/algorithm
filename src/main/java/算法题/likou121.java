@@ -48,6 +48,7 @@ public class likou121 {
         }
         return dp[n-1][0];
     }
+
     public int maxProfit2(int[] prices) {
         int n=prices.length;
         int dp_i_0 = 0, dp_i_1 = Integer.MIN_VALUE;
