@@ -18,26 +18,26 @@ package 算法题;
  */
 public class likou213 {
     public static void main(String[] args) {
-        
         int[] num={2,3,2};
         likou213 likou198 = new likou213();
         int rob = likou198.rob(num);
         System.out.println(rob);
     }
+
     public int rob(int[] nums) {
         int n=nums.length;
         if (n==1)return nums[0];
-
         return Math.max(robRange(nums,0,n-2),robRange(nums,1,n-1));
     }
+
     int robRange(int[] nums,int start,int end){
         int n=nums.length;
-        int res=0,i_1=0,i_2=0;
+        int dp_i=0,i_1=0,i_2=0;
         for (int i = end; i >=start; i--) {
-            res=Math.max(i_2+nums[i],i_1);
+            dp_i=Math.max(i_2+nums[i],i_1);
             i_2=i_1;
-            i_1=res;
+            i_1=dp_i;
         }
-        return res;
+        return dp_i;
     }
 }

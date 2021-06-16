@@ -22,7 +22,7 @@ public class likou198 {
 //        int[] num={1,2,3,1};
         int[] num = {2, 7, 9, 3, 1};
         likou198 likou198 = new likou198();
-        int rob = likou198.rob2(num);
+        int rob = likou198.rob3(num);
         System.out.println(rob);
     }
 
@@ -55,13 +55,13 @@ public class likou198 {
     public int rob4(int[] nums) {
         if (nums == null || nums.length == 0) return 0;
         int length = nums.length;
-        int dp_i2 = 0, res = 0, dp_i1 = 0;
+        int dp_i2 = 0, dp_i = 0, dp_i1 = 0;
         for (int i = length - 1; i >= 0; i--) {
-            res = Math.max(dp_i2 + nums[i], dp_i1);
+            dp_i = Math.max(dp_i2 + nums[i], dp_i1);
             dp_i2 = dp_i1;
-            dp_i1 = res;
+            dp_i1 = dp_i;
         }
-        return res;
+        return dp_i;
     }
 
     //带备忘录的递归解法
