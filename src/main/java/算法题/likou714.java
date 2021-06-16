@@ -34,7 +34,6 @@ public class likou714 {
            dp_0=Math.max(dp_0,dp_1+price);
            dp_1=Math.max(dp_1,dp_0-fee-price);
         }
-
         return dp_0;
     }
 }

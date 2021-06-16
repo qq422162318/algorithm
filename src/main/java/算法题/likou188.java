@@ -26,8 +26,8 @@ public class likou188 {
         likou188 likou188 = new likou188();
         int[] prices={3,2,6,5,0,3};
         System.out.println(likou188.maxProfit(2, prices));
-
     }
+
     public int maxProfit(int max_k, int[] prices) {
         int n=prices.length;
         if (max_k>n/2)return maxProfit(prices);
@@ -45,6 +45,7 @@ public class likou188 {
         }
         return dp[n-1][max_k][0];
     }
+
     public int maxProfit(int[] prices) {
         int n=prices.length;
         int dp_0=0,dp_1=Integer.MIN_VALUE;
