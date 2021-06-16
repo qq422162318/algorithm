@@ -22,17 +22,18 @@ package 算法题;
  */
 public class likou714 {
     public static void main(String[] args) {
-       int[] prices={1,3,2,8,4,9};
-       int fee=2;
+        int[] prices = {1, 3, 2, 8, 4, 9};
+        int fee = 2;
         likou714 likou714 = new likou714();
         System.out.println(likou714.maxProfit(prices, fee));
     }
+
     public int maxProfit(int[] prices, int fee) {
         int n = prices.length;
-        int dp_0=0,dp_1=Integer.MIN_VALUE;
+        int dp_0 = 0, dp_1 = Integer.MIN_VALUE;
         for (int price : prices) {
-           dp_0=Math.max(dp_0,dp_1+price);
-           dp_1=Math.max(dp_1,dp_0-fee-price);
+            dp_0 = Math.max(dp_0, dp_1 + price);
+            dp_1 = Math.max(dp_1, dp_0 - fee - price);
         }
         return dp_0;
     }
