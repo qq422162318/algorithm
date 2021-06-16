@@ -29,6 +29,7 @@ public class likou122 {
         likou122 likou122 = new likou122();
         System.out.println(likou122.maxProfit(nums));
     }
+
     public int maxProfit(int[] prices) {
         int n=prices.length;
         int dp_0=0,dp_1=Integer.MIN_VALUE;
