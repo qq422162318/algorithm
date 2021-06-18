@@ -53,4 +53,27 @@ public class likou1312 {
         }
         return dp[0][n-1];
     }
+
+    /**
+     * 状态压缩
+     * @param s
+     * @return
+     */
+    public int minInsertions2(String s) {
+        if (s.length() == 1) return 0;
+        int n = s.length();
+        int[] dp = new int[n];
+        for (int i = n - 2; i >= 0; i--) {
+            int pre=0;
+            for (int j = i + 1; j < n; j++) {
+                int temp=dp[j];
+                if (s.charAt(i) == s.charAt(j))
+                    dp[j] = pre;
+                else
+                    dp[j] = Math.min(dp[j], dp[j - 1]) + 1;
+                pre=temp;
+            }
+        }
+        return dp[n-1];
+    }
 }
