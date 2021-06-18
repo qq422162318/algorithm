@@ -32,10 +32,10 @@ public class likou1312 {
         likou1312 likou = new likou1312();
         System.out.println(likou.minInsertions("leetcode"));
     }
+
     /**
      * 定义一个二维的 dp 数组，dp[i][j] 的定义如下：
      * 对字符串 s[i..j]，最少需要进行 dp[i][j] 次插入才能变成回文串。
-     *
      * @param s
      * @return
      */
@@ -49,6 +49,8 @@ public class likou1312 {
                     dp[i][j] = dp[i + 1][j - 1];
                 else
                     dp[i][j] = Math.min(dp[i + 1][j], dp[i][j - 1]) + 1;
+                    dp[i][j] = Math.min(Math.min(dp[i + 1][j], dp[i][j - 1]) + 1,
+                                          dp[i+1][j-1]+2);
             }
         }
         return dp[0][n-1];
