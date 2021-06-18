@@ -14,7 +14,7 @@ public class KMP {
     public static void main(String[] args) {
         String s = "dsjkflsjflksdjfkldjfksldjfskdlfjsdklfjsldkjflsdkjfsdklfuiop";
         String t = "uiop";
-        String kp = "abcabd";
+        String kp = "ababc";
         int[] next = getNext(kp);
         System.out.println(KMP(s, t));
         KMP kmp = new KMP();
@@ -98,4 +98,39 @@ public class KMP {
         }
     }
 
+    /**
+     * labuladong kmp
+     */
+    public class kmp {
+        private int[][] dp;
+        private String pat;
+
+        public kmp(String pat) {
+            this.pat = pat;
+            int m = pat.length();
+            dp = new int[m][256];
+            dp[0][pat.charAt(0)] = 1;
+            int x = 0;
+            for (int j = 1; j < m; j++) {
+                for (int c = 0; c < 256; c++) {
+                    if (pat.charAt(j) == c)
+                        dp[j][c] = j + 1;
+                    else
+                        dp[j][c] = dp[x][c];
+                }
+                x = dp[x][pat.charAt(j)];
+            }
+        }
+
+        public int search(String txt) {
+            int m = pat.length();
+            int n = txt.length();
+            int j = 0;
+            for (int i = 0; i < n; i++) {
+                j = dp[j][txt.charAt(i)];
+                if (j == n) return i - m + 1;
+            }
+            return -1;
+        }
+    }
 }
