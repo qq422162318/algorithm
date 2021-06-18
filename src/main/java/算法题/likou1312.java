@@ -28,7 +28,29 @@ package 算法题;
  * s 中所有字符都是小写字母。
  */
 public class likou1312 {
+    public static void main(String[] args) {
+        likou1312 likou = new likou1312();
+        System.out.println(likou.minInsertions("leetcode"));
+    }
+    /**
+     * 定义一个二维的 dp 数组，dp[i][j] 的定义如下：
+     * 对字符串 s[i..j]，最少需要进行 dp[i][j] 次插入才能变成回文串。
+     *
+     * @param s
+     * @return
+     */
     public int minInsertions(String s) {
-
+        if (s.length() == 1) return 0;
+        int n = s.length();
+        int[][] dp = new int[n][n];
+        for (int i = n - 1; i >= 0; i--) {
+            for (int j = i + 1; j < n; j++) {
+                if (s.charAt(i) == s.charAt(j))
+                    dp[i][j] = dp[i + 1][j - 1];
+                else
+                    dp[i][j] = Math.min(dp[i + 1][j], dp[i][j - 1]) + 1;
+            }
+        }
+        return dp[0][n-1];
     }
 }
