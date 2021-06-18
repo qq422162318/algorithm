@@ -21,20 +21,21 @@ import java.util.List;
 public class likou46 {
     public static void main(String[] args) {
         int[] nums = {1, 2, 3};
-        List<List<Integer>> permute = permute(nums);
+        likou46 likou = new likou46();
+        List<List<Integer>> permute = likou.permute(nums);
         for (List<Integer> integers : permute) {
             System.out.println(integers);
         }
     }
 
-    public static List<List<Integer>> permute(int[] nums) {
+    public List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> list = new ArrayList<>();
         int[] visited = new int[nums.length];
         backtrack(list, nums, new ArrayList<Integer>(), visited);
         return list;
     }
 
-    public static void backtrack(List<List<Integer>> list, int[] nums, List<Integer> res, int[] visited) {
+    public void backtrack(List<List<Integer>> list, int[] nums, List<Integer> res, int[] visited) {
         if (nums.length == 0) return;
         if (res.size() == nums.length) {
             list.add(new ArrayList<>(res));
