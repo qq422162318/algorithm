@@ -78,7 +78,6 @@ public class likou51 {
                 col[i] = false;
                 left[r + i] = false;
                 right[r - i + n - 1] = false;
-
             }
         }
     }
