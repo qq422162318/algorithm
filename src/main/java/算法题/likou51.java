@@ -33,7 +33,7 @@ import java.util.List;
 public class likou51 {
     public static void main(String[] args) {
         likou51 likou51 = new likou51();
-        List<List<String>> lists = likou51.solveNQueens(4);
+        List<List<String>> lists = likou51.solveNQueens2(4);
         System.out.println(lists.size());
         for (List<String> list : lists) {
             for (String s : list) {
@@ -57,27 +57,26 @@ public class likou51 {
         return ret;
     }
 
-    public void backTrack(char[][] board, int r, int n) {
-        if (r >= n) {
+    public void backTrack(char[][] board, int row, int n) {
+        if (row >= n) {
             List<String> list = new ArrayList<>();
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++)
                 list.add(new String(board[i]));
-            }
             ret.add(list);
             return;
         }
-        Arrays.fill(board[r], '.');
+        Arrays.fill(board[row], '.');
         for (int i = 0; i < n; i++) {
-            if (!col[i] && !left[r + i] && !right[r - i + n - 1]) {
-                board[r][i] = 'Q';
+            if (!col[i] && !left[row + i] && !right[row - i + n - 1]) {
+                board[row][i] = 'Q';
                 col[i] = true;
-                left[r + i] = true;
-                right[r - i + n - 1] = true;
-                backTrack(board, r + 1, n);
-                board[r][i] = '.';
+                left[row + i] = true;
+                right[row - i + n - 1] = true;
+                backTrack(board, row + 1, n);
+                board[row][i] = '.';
                 col[i] = false;
-                left[r + i] = false;
-                right[r - i + n - 1] = false;
+                left[row + i] = false;
+                right[row - i + n - 1] = false;
             }
         }
     }
@@ -104,8 +103,7 @@ public class likou51 {
                 continue;
             }
             board[row][i] = 'Q';
-            if (backtrack(board, row + 1))
-                return true;
+            backtrack(board, row + 1);
             board[row][i] = '.';
         }
         return false;
