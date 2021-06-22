@@ -19,8 +19,8 @@ public class likou698 {
     public static void main(String[] args) {
         likou698 likou698 = new likou698();
         int[] n = {4, 3, 2, 3, 5, 2, 1};
-
-        System.out.println(likou698.canPartitionKSubsets2(n, 4));
+//        int[] n = {2,2,2,2,3,4,5};
+        System.out.println(likou698.canPartitionKSubsets(n, 4));
     }
 
     public boolean canPartitionKSubsets(int[] nums, int k) {
@@ -58,25 +58,37 @@ public class likou698 {
         return false;
     }
 
-    public boolean canPartitionKSubsets2(int[] nums, int k) {
+    /**
+     * 最快
+     * 执行用时：
+     * 1 ms
+     * @param nums
+     * @param k
+     * @return
+     */
+    public boolean canPartitionKSubsets3(int[] nums, int k) {
+        // 排除一些基本情况
         if (k > nums.length) return false;
         int sum = 0;
-        for (int num : nums) sum += num;
+        for (int v : nums) sum += v;
         if (sum % k != 0) return false;
-        int[] bucket = new int[k];
+        boolean[] used = new boolean[nums.length];
         int target = sum / k;
-        Arrays.sort(nums);
-        return backtrack2(nums, nums.length - 1, k, bucket);
+        // k 号桶初始什么都没装，从 nums[0] 开始做选择
+        return backtrack(k, 0, nums, 0, used, target);
     }
-
-    private boolean backtrack2(int[] nums, int cur, int k, int[] bucket) {
-        if (cur < 0) return true;
-        for (int i = 0; i < k; i++) {
-            if (bucket[i] == nums[cur] || bucket[i] - nums[cur] > nums[0]) {
-                bucket[i] -= nums[cur];
-                if (backtrack2(nums, cur + 1, k, bucket)) return true;
-                bucket[i] += nums[cur];
-            }
+    private boolean backtrack(int k, int bucket, int[] nums, int start, boolean[] used, int target) {
+        if (k == 0) return true;
+        if (bucket == target) return backtrack(k - 1, 0, nums, 0, used, target);
+        for (int i = start; i < nums.length; i++) {
+            if (used[i]) continue;
+            if (nums[i] + bucket > target) continue;
+            used[i] = true;
+            bucket += nums[i];
+            if (backtrack(k, bucket, nums, i + 1, used, target))
+                return true;
+            used[i] = false;
+            bucket -= nums[i];
         }
         return false;
     }
