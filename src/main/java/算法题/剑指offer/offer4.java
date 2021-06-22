@@ -21,7 +21,7 @@ import javax.naming.ldap.ManageReferralControl;
  * 0 <= m <= 1000
  * 注意：本题与主站 240 题相同：https://leetcode-cn.com/problems/search-a-2d-matrix-ii/
  */
-public class problem4 {
+public class offer4 {
     public boolean findNumberIn2DArray(int[][] matrix, int target) {
         if (matrix.length==0||matrix[0].length==0)return false;
         int m=matrix.length,n=matrix[0].length;

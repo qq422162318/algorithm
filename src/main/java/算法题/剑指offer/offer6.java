@@ -1,7 +1,5 @@
 package 算法题.剑指offer;
 
-import java设计原则.里氏替换原则.Liskov;
-
 /**
  * 剑指 Offer 06. 从尾到头打印链表
  * 输入一个链表的头节点，从尾到头反过来返回每个节点的值（用数组返回）。
@@ -11,7 +9,7 @@ import java设计原则.里氏替换原则.Liskov;
  * 限制：
  * 0 <= 链表长度 <= 10000
  */
-public class problem6 {
+public class offer6 {
     public static class ListNode {
         int val;
         ListNode next;
@@ -22,11 +20,11 @@ public class problem6 {
     }
 
     public static void main(String[] args) {
-        problem6 problem6 = new problem6();
+        offer6 offer6 = new offer6();
         ListNode node = new ListNode(1);
         node.next = new ListNode(3);
         node.next.next = new ListNode(2);
-        int[] ints = problem6.reversePrint(node);
+        int[] ints = offer6.reversePrint(node);
         System.out.println(ints);
     }
 

@@ -22,7 +22,7 @@ package 算法题.剑指offer;
  * <p>
  * 0 <= n <= 100
  */
-public class problem10_2 {
+public class offer10_2 {
     public static void main(String[] args) {
         System.out.println(numWays(100));
     }

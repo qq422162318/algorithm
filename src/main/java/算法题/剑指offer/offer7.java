@@ -17,7 +17,7 @@ import java.util.HashMap;
  * 限制：
  * 0 <= 节点个数 <= 5000
  */
-public class problem7 {
+public class offer7 {
     public class TreeNode {
         int val;
         TreeNode left;

@@ -17,7 +17,7 @@ package 算法题.剑指offer;
  * 最多会对 appendTail、deleteHead 进行 10000 次调用
  */
 import java.util.LinkedList;
-public class problem9 {
+public class offer9 {
     class CQueue {
         LinkedList<Integer> in;
         LinkedList<Integer> out;

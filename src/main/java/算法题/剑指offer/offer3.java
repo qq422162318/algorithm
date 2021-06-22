@@ -14,7 +14,7 @@ import java.util.HashSet;
  * 限制：
  * 2 <= n <= 100000
  */
-public class problem3 {
+public class offer3 {
     public int findRepeatNumber(int[] nums) {
         HashSet<Integer> set=new HashSet<>();
         for(int i=0;i<nums.length;i++){

@@ -8,10 +8,10 @@ package 算法题.剑指offer;
  * 限制：
  * 0 <= s 的长度 <= 10000
  */
-public class problem5 {
+public class offer5 {
     public static void main(String[] args) {
-        problem5 problem5 = new problem5();
-        System.out.println(problem5.replaceSpace("We are"));
+        offer5 offer5 = new offer5();
+        System.out.println(offer5.replaceSpace("We are"));
     }
     public String replaceSpace(String s) {
         if (s.length()==0)return null;
