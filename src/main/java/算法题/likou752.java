@@ -56,10 +56,10 @@ public class likou752 {
             for (int i = 0; i < size; i++) {
                 String cur = queue.poll();
                 /* 判断是否到达终点 */
-                if (deads.contains(cur)) {
+                if (deads.contains(cur))
                     continue;
-                }
-                if (cur.equals(target)) return step;
+                if (cur.equals(target))
+                    return step;
                 /* 将一个节点的未遍历相邻节点加入队列 */
                 for (int j = 0; j < 4; j++) {
                     String up = plusOne(cur, j);
