@@ -38,7 +38,7 @@ public class likou752 {
         //        likou752.bfs("1234");
         String[] strings = new String[]{"0201", "0101", "0102", "1212", "2002"};
         String target = "0202";
-        System.out.println(likou752.openLock(strings, target));
+        System.out.println(likou752.openLock2(strings, target));
     }
 
     //正确解法(单向bfs)
@@ -122,25 +122,6 @@ public class likou752 {
             q2 = temp;
         }
         return -1;
-    }
-
-    //遍历所有可能性
-    public void bfs(String target) {
-        Queue<String> queue = new LinkedList<>();
-        queue.offer("0000");
-        while (!queue.isEmpty()) {
-            int size = queue.size();
-            for (int i = 0; i < size; i++) {
-                String cur = queue.poll();
-                System.out.println(cur);
-                for (int j = 0; j < 4; j++) {
-                    String up = plusOne(cur, j);
-                    String down = minusOne(cur, j);
-                    queue.offer(up);
-                    queue.offer(down);
-                }
-            }
-        }
     }
 
     private String minusOne(String cur, int j) {
