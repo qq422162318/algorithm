@@ -12,14 +12,12 @@ public class Shell {
             for (int i = h; i < a.length - 1; i++) {
                 //把待插入的元素插入到有序数列中
                 for (int j = i; j >= h; j -= h) {
-                    if (greater(a[j - h], a[j])) {
+                    if (greater(a[j - h], a[j]))
                         exch(a, j - h, j);
-                    } else {
+                    else
                         break;
-                    }
                 }
             }
-
             h = h / 2;
         }
     }
