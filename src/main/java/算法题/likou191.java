@@ -28,6 +28,7 @@ public class likou191 {
         likou191 likou = new likou191();
         int i = likou.hammingWeight2(-3);
         System.out.println(i);
+        System.out.println((i&i-1)==0);
     }
 
     public int hammingWeight(int n) {
