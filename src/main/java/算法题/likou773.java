@@ -1,5 +1,7 @@
 package 算法题;
 
+import java.util.*;
+
 /**
  * 773. 滑动谜题
  * 在一个 2 x 3 的板上（board）有 5 块砖瓦，用数字 1~5 来表示, 以及一块空缺用 0 来表示.
@@ -31,7 +33,62 @@ package 算法题;
  * board[i][j] 是一个 [0, 1, 2, 3, 4, 5] 的排列.
  */
 public class likou773 {
-    public int slidingPuzzle(int[][] board) {
+    public static void main(String[] args) {
+        likou773 likou773 = new likou773();
+        int[][] board = {
+                {1, 2, 3}, {4, 0, 5}
+        };
+        System.out.println(likou773.slidingPuzzle(board));
+    }
 
+    public int slidingPuzzle(int[][] board) {
+        if (board.length == 0) return -1;
+        int m = 2, n = 3;
+        String start = "";
+        String target = "123450";
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++)
+                start += (char) (board[i][j] + '0');
+        }
+        int[][] neighbor = {
+                {1, 3},
+                {0, 4, 2},
+                {1, 5},
+                {0, 4},
+                {3, 1, 5},
+                {4, 2}
+        };
+        Queue<String> q = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+        q.offer(start);
+        visited.add(start);
+        int step = 0;
+        while (!q.isEmpty()) {
+            int sz = q.size();
+            for (int i = 0; i < sz; i++) {
+                String cur = q.poll();
+                if (target.equals(cur)) return step;
+                int idx = 0;
+                for (; cur.charAt(idx) != '0'; idx++) ;
+                for (int adj : neighbor[idx]) {
+                    String new_board = cur;
+                    new_board = swap(new_board, adj, idx);
+                    if (!visited.contains(new_board)) {
+                        q.offer(new_board);
+                        visited.add(new_board);
+                    }
+                }
+            }
+            step++;
+        }
+        return -1;
+    }
+
+    private String swap(String new_board, int adj, int idx) {
+        char[] chars = new_board.toCharArray();
+        char temp = chars[adj];
+        chars[adj] = chars[idx];
+        chars[idx] = temp;
+        return new String(chars);
     }
 }
