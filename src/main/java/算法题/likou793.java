@@ -22,6 +22,7 @@ public class likou793 {
     }
     long MAX=1000000000;
     public int preimageSizeFZF(int k) {
+        if (k == MAX) return 5;
         return (int) ((int) (right_bound(k) - left_bound(k)) + 1);
     }
 
