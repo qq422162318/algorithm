@@ -32,7 +32,7 @@ public class likou204 {
                     isPrim[j] = false;
         }
         int count = 0;
-        for (int i = 2; i <= n; i++) {
+        for (int i = 2; i < n; i++) {
             if (isPrim[i]) count++;
         }
         return count;
