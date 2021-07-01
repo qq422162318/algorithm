@@ -25,9 +25,9 @@ public class likou372 {
         likou372 likou = new likou372();
         int[] a = {2, 0, 0};
         System.out.println(likou.superPow(2147483647, a));
-        System.out.println((256%15));
-        System.out.println((4%15));
-        System.out.println(1024%15);
+        System.out.println((256 % 15));
+        System.out.println((4 % 15));
+        System.out.println(1024 % 15);
     }
 
     int base = 1337;
@@ -46,7 +46,7 @@ public class likou372 {
         return (part1 * part2) % base;
     }
 
-    int mypow(int a, int k) {
+    int mypow2(int a, int k) {
         a = a % base;
         int res = 1;
         for (int i = 0; i < k; i++) {
@@ -54,5 +54,16 @@ public class likou372 {
             res %= base;
         }
         return res;
+    }
+
+    int mypow(int a, int k) {
+        if (k == 0) return 1;
+        a = a % base;
+        if (k % 2 == 1)
+            return (a * mypow(a, k - 1)) % base;
+        else {
+            int sub = mypow(a, k / 2);
+            return (sub * sub) % base;
+        }
     }
 }
