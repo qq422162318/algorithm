@@ -18,22 +18,22 @@ package 算法题;
 public class likou793 {
     public static void main(String[] args) {
         likou793 likou = new likou793();
-        System.out.println(likou.preimageSizeFZF2(0));
+        System.out.println(likou.preimageSizeFZF(1000000000));
     }
-
+    long MAX=1000000000;
     public int preimageSizeFZF(int k) {
         return (int) ((int) (right_bound(k) - left_bound(k)) + 1);
     }
 
     long left_bound(int target) {
-        long lo = 0, hi = Long.MAX_VALUE;
+        long lo = 0, hi = MAX;
         while (lo < hi) {
             long mid = lo + (hi - lo) / 2;
             long compute = compute(mid);
             if (compute < target)
                 lo = mid + 1;
             else if (compute > target)
-                hi = mid - 1;
+                hi = mid;
             else
                 hi = mid;
         }
@@ -41,7 +41,7 @@ public class likou793 {
     }
 
     long right_bound(int target) {
-        long lo = 0, hi = Long.MAX_VALUE;
+        long lo = 0, hi = MAX;
         while (lo < hi) {
             long mid = lo + (hi - lo) / 2;
             long compute = compute(mid);
@@ -50,7 +50,7 @@ public class likou793 {
             else if (compute > target)
                 hi = mid;
             else
-                hi = mid + 1;
+                lo = mid + 1;
         }
         return lo - 1;
     }
