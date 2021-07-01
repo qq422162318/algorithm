@@ -60,6 +60,7 @@ public class likou372 {
         if (k == 0) return 1;
         a = a % base;
         if (k % 2 == 1)
+            // k 是奇数
             return (a * mypow(a, k - 1)) % base;
         else {
             int sub = mypow(a, k / 2);
