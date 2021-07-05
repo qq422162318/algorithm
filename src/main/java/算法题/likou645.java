@@ -13,7 +13,29 @@ package 算法题;
  * 输出：[1,2]
  */
 public class likou645 {
-    public int[] findErrorNums(int[] nums) {
+    public static void main(String[] args) {
+        likou645 likou = new likou645();
+        int[] a={1,2,2,4};
+        for (int errorNum : likou.findErrorNums(a)) {
+            System.out.println(errorNum);
+        }
+    }
 
+    public int[] findErrorNums(int[] nums) {
+        int n = nums.length;
+        int dup = -1;
+        for (int i = 0; i < n; i++) {
+            int index = Math.abs(nums[i]) - 1;
+            if (nums[index] < 0)
+                dup = Math.abs(nums[i]);
+            else
+                nums[index] *= -1;
+        }
+        int missing = -1;
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > 0)
+                missing = i+1;
+        }
+        return new int[]{dup, missing};
     }
 }
