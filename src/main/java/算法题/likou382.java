@@ -18,60 +18,101 @@ import java.util.Random;
  */
 public class likou382 {
     public static void main(String[] args) {
+        likou382 likou382 = new likou382();
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        Solution solution = new Solution(head);
 
     }
 
-    public void Solution(ListNode head) {
-        ListNode p = head;
-        int index = getRandom();
-        int[] res = new int[index];
-        for (int i = 0; i < index; i++) {
-            while (i < index && p != null) {
+    static class Solution {
+        public Solution(ListNode head) {
+            ListNode p = head;
+            int index = getRandom();
+            int[] res = new int[index];
+            for (int i = 0; i < index; i++) {
+                while (i < index && p != null) {
+                    res[i] = p.val;
+                    p = p.next;
+                }
+            }
+            //int i=k;
+            while (p != null) {
+                int j = new Random().nextInt(index);
+                if (j < index) {
+                    res[j] = p.val;
+                }
+            }
+        }
+
+        int n = 0;
+
+        /**
+         * Returns a random node's value.
+         */
+        public int getRandom() {
+            Random r = new Random();
+            int r_index = r.nextInt(++n);
+            return r_index;
+        }
+
+        public int[] getRandom2(ListNode head, int k) {
+            Random r = new Random();
+            int[] res = new int[k];
+            ListNode p = head;
+            for (int i = 0; i < k && p != null; i++) {
                 res[i] = p.val;
                 p = p.next;
             }
-        }
-        //int i=k;
-        while (p != null) {
-            int j = new Random().nextInt(index);
-            if (j < index) {
-                res[j] = p.val;
+            int i = k;
+            while (p != null) {
+                int j = r.nextInt(++i);
+                if (j < k)
+                    res[j] = p.val;
+                p = p.next;
             }
+            return res;
         }
     }
 
-    int n = 0;
+    static class Solution2 {
+        public Solution2(ListNode head) {
+            ListNode p = head;
+            while(p!=null){
+                n++;
+                p=p.next;
+            }
+            this.head=head;
+        }
 
-    /**
-     * Returns a random node's value.
-     */
-    public int getRandom() {
-        Random r = new Random();
-        int r_index = r.nextInt(++n);
-
-        return r_index;
+        int n = 0;
+        ListNode head;
+        public int getRandom() {
+            int[] random = getRandom(head, 2);
+            int index=new Random().nextInt(random.length);
+            return random[index];
+        }
+        public int[] getRandom(ListNode head, int k) {
+            Random r = new Random();
+            int[] res = new int[k];
+            ListNode p = head;
+            for (int i = 0; i < k && p != null; i++) {
+                res[i] = p.val;
+                p = p.next;
+            }
+            int i = k;
+            while (p != null) {
+                int j = r.nextInt(++i);
+                if (j < k)
+                    res[j] = p.val;
+                p = p.next;
+            }
+            return res;
+        }
     }
 
-    public int[] getRandom2(ListNode head, int k) {
-        Random r = new Random();
-        int[] res = new int[k];
-        ListNode p = head;
-        for (int i = 0; i < k && p != null; i++) {
-            res[i] = p.val;
-            p = p.next;
-        }
-        int i = k;
-
-        while (p != null) {
-            int j = r.nextInt(++i);
-            if (j < k)
-                res[j] = p.val;
-            p = p.next;
-        }
-        return res;
-    }
-
-    public class ListNode {
+    public static class ListNode {
         int val;
         ListNode next;
 
