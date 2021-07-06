@@ -1,6 +1,7 @@
 package 算法题;
 
 import java.util.Random;
+
 /**
  * 382. 链表随机节点
  * 给定一个单链表，随机选择链表的一个节点，并返回相应的节点值。保证每个节点被选的概率一样。
@@ -23,34 +24,55 @@ public class likou382 {
     public static void main(String[] args) {
 
     }
-    
+
     public void Solution(ListNode head) {
-        ListNode p=head;
-         int index=getRandom();
-         int[] res=new int[index];
-         for (int i = 0; i < index; i++) {
-             while(i<index&&p!=null){
-                 res[i]=p.val;
-                 p=p.next;
-             }
-         }
-         //int i=k;
-         while(p!=null){
-             int j=new Random().nextInt(index);
-             if(j<index){
-                 res[j]=p.val;
-             }
-         }
+        ListNode p = head;
+        int index = getRandom();
+        int[] res = new int[index];
+        for (int i = 0; i < index; i++) {
+            while (i < index && p != null) {
+                res[i] = p.val;
+                p = p.next;
+            }
+        }
+        //int i=k;
+        while (p != null) {
+            int j = new Random().nextInt(index);
+            if (j < index) {
+                res[j] = p.val;
+            }
+        }
     }
-    int n=0;
+
+    int n = 0;
+
     /**
      * Returns a random node's value.
      */
     public int getRandom() {
-      Random r=new Random();
-      int r_index=r.nextInt(++n);
+        Random r = new Random();
+        int r_index = r.nextInt(++n);
 
-      return r_index;
+        return r_index;
+    }
+
+    public int[] getRandom2(ListNode head, int k) {
+        Random r = new Random();
+        int[] res = new int[k];
+        ListNode p = head;
+        for (int i = 0; i < k && p != null; i++) {
+            res[i] = p.val;
+            p = p.next;
+        }
+        int i = k;
+        
+        while (p != null) {
+            int j = r.nextInt(++i);
+            if (j < k)
+                res[j] = p.val;
+            p = p.next;
+        }
+        return res;
     }
 
     public class ListNode {
