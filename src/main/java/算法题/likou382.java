@@ -23,54 +23,26 @@ public class likou382 {
         head.next = new ListNode(2);
         head.next.next = new ListNode(3);
         Solution solution = new Solution(head);
-
     }
 
     static class Solution {
+        private ListNode head;
+
         public Solution(ListNode head) {
-            ListNode p = head;
-            int index = getRandom();
-            int[] res = new int[index];
-            for (int i = 0; i < index; i++) {
-                while (i < index && p != null) {
-                    res[i] = p.val;
-                    p = p.next;
-                }
-            }
-            //int i=k;
-            while (p != null) {
-                int j = new Random().nextInt(index);
-                if (j < index) {
-                    res[j] = p.val;
-                }
-            }
+            this.head = head;
         }
 
-        int n = 0;
-
-        /**
-         * Returns a random node's value.
-         */
         public int getRandom() {
-            Random r = new Random();
-            int r_index = r.nextInt(++n);
-            return r_index;
-        }
-
-        public int[] getRandom2(ListNode head, int k) {
-            Random r = new Random();
-            int[] res = new int[k];
-            ListNode p = head;
-            for (int i = 0; i < k && p != null; i++) {
-                res[i] = p.val;
-                p = p.next;
-            }
-            int i = k;
-            while (p != null) {
-                int j = r.nextInt(++i);
-                if (j < k)
-                    res[j] = p.val;
-                p = p.next;
+            int res = head.val;
+            ListNode no = head.next;
+            int i = 2;
+            Random random = new Random();
+            while (no != null) {
+                if (random.nextInt(i) == 0) {
+                    res = no.val;
+                }
+                i++;
+                no = no.next;
             }
             return res;
         }
@@ -79,20 +51,22 @@ public class likou382 {
     static class Solution2 {
         public Solution2(ListNode head) {
             ListNode p = head;
-            while(p!=null){
+            while (p != null) {
                 n++;
-                p=p.next;
+                p = p.next;
             }
-            this.head=head;
+            this.head = head;
         }
 
         int n = 0;
         ListNode head;
+
         public int getRandom() {
             int[] random = getRandom(head, 2);
-            int index=new Random().nextInt(random.length);
+            int index = new Random().nextInt(random.length);
             return random[index];
         }
+
         public int[] getRandom(ListNode head, int k) {
             Random r = new Random();
             int[] res = new int[k];
