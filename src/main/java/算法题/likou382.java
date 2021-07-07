@@ -48,44 +48,6 @@ public class likou382 {
         }
     }
 
-    static class Solution2 {
-        public Solution2(ListNode head) {
-            ListNode p = head;
-            while (p != null) {
-                n++;
-                p = p.next;
-            }
-            this.head = head;
-        }
-
-        int n = 0;
-        ListNode head;
-
-        public int getRandom() {
-            int[] random = getRandom(head, 2);
-            int index = new Random().nextInt(random.length);
-            return random[index];
-        }
-
-        public int[] getRandom(ListNode head, int k) {
-            Random r = new Random();
-            int[] res = new int[k];
-            ListNode p = head;
-            for (int i = 0; i < k && p != null; i++) {
-                res[i] = p.val;
-                p = p.next;
-            }
-            int i = k;
-            while (p != null) {
-                int j = r.nextInt(++i);
-                if (j < k)
-                    res[j] = p.val;
-                p = p.next;
-            }
-            return res;
-        }
-    }
-
     public static class ListNode {
         int val;
         ListNode next;
