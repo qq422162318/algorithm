@@ -32,7 +32,56 @@ package 算法题;
  * 1 <= seatsi <= 104
  */
 public class likou1109 {
-    public int[] corpFlightBookings(int[][] bookings, int n) {
+    public static void main(String[] args) {
+        likou1109 likou1109 = new likou1109();
+        int[][] cc = {
+                {1, 2, 10},
+                {2, 3, 20},
+                {2, 5, 25}};
+        int[] book = likou1109.corpFlightBookings(cc, 5);
+        for (int i : book) {
+            System.out.println(i);
+        }
+    }
 
+    public int[] corpFlightBookings(int[][] bookings, int n) {
+        int[] nums = new int[n];
+        Different diff = new Different(nums);
+        for (int[] booking : bookings) {
+            int i = booking[0] - 1;
+            int j = booking[1] - 1;
+            int val = booking[2];
+            diff.increment(i, j, val);
+        }
+        return diff.result();
+    }
+}
+
+class Different {
+    private int[] diff;
+
+    public Different(int[] nums) {
+        assert nums.length > 0;
+        diff = new int[nums.length];
+        diff[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            diff[i] = nums[i] - nums[i - 1];
+        }
+    }
+
+    public void increment(int i, int j, int val) {
+        diff[i] += val;
+        if (j + 1 < diff.length) {
+            diff[j + 1] -= val;
+        }
+    }
+
+    public int[] result() {
+        int[] res = new int[diff.length];
+        res[0] = diff[0];
+        for (int i = 1; i < diff.length; i++) {
+            res[i] = res[i - 1] + diff[i];
+        }
+        return res;
     }
 }
