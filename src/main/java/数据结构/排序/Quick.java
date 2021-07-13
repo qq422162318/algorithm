@@ -21,9 +21,8 @@ public class Quick {
     }
 
     public void sort(Comparable[] a, int left, int right) {
-        if (right <= left) {
+        if (right <= left)
             return;
-        }
         //需要对数组中lo索引处的元素进行分组(左子组和右子组)
         int partition = partition(a, left, right);//返回的是分组的分界值所在的索引,分界值位置变换后的索引
         //让左子组有序
@@ -41,21 +40,16 @@ public class Quick {
         while (true) {
             while (less(key, a[--right])) {
                 //先从右往左扫描移动right指针,找一个比分界值小的元素,停止
-                if (right == lo) {
-                    break;
-                }
+                if (right == lo) break;
             }
             //先从左往右
             while (less(a[++left], key)) {
-                if (left == hi) {
-                    break;
-                }
+                if (left == hi) break;
             }
-            if (left >= right) {
+            if (left >= right)
                 break;
-            } else {
+            else
                 exch(a, left, right);
-            }
         }
         exch(a, lo, right);
         return right;
