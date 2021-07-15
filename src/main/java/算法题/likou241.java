@@ -24,5 +24,6 @@ import java.util.List;
 public class likou241 {
     public List<Integer> diffWaysToCompute(String expression) {
 
+        return null;
     }
 }
