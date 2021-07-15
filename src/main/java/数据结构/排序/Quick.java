@@ -48,8 +48,7 @@ public class Quick {
             }
             if (left >= right)
                 break;
-            else
-                exch(a, left, right);
+            exch(a, left, right);
         }
         exch(a, lo, right);
         return right;
