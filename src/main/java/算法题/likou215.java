@@ -20,7 +20,7 @@ public class likou215 {
         return nums[nums.length-k];
     }
 
-    public int dd(int[] nums,int k){
+    public int findKthLargest2(int[] nums,int k){
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int num : nums) {
             pq.offer(num);
