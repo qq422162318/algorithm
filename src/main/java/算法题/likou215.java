@@ -1,10 +1,8 @@
 package 算法题;
 
-import com.sun.media.sound.RIFFInvalidDataException;
-
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.PriorityQueue;
+import java.util.Random;
 
 /**
  * 215. 数组中的第K个最大元素
@@ -40,7 +38,7 @@ public class likou215 {
     }
 
     public int findKthLargest3(int[] nums, int k) {
-        Collections.shuffle(Collections.singletonList(nums));
+        shuffle(nums);
         int lo = 0, hi = nums.length - 1;
         k = nums.length - k;
         while (lo <= hi) {
@@ -76,5 +74,13 @@ public class likou215 {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
+    }
+
+    private void shuffle(int[] nums) {
+        Random r = new Random();
+        for (int i = 0; i < nums.length; i++) {
+            int j = r.nextInt(nums.length - 1);
+            exch(nums, i, j);
+        }
     }
 }
