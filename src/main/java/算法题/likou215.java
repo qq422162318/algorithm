@@ -1,6 +1,9 @@
 package 算法题;
 
+import com.sun.media.sound.RIFFInvalidDataException;
+
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 /**
@@ -15,18 +18,63 @@ import java.util.PriorityQueue;
  * 输出: 4
  */
 public class likou215 {
-    public int findKthLargest(int[] nums, int k) {
-        Arrays.sort(nums);
-        return nums[nums.length-k];
+    public static void main(String[] args) {
+        likou215 likou215 = new likou215();
+        int[] n = {3, 2, 1, 5, 6, 4};
+        System.out.println(likou215.findKthLargest3(n, 2));
     }
 
-    public int findKthLargest2(int[] nums,int k){
+    public int findKthLargest(int[] nums, int k) {
+        Arrays.sort(nums);
+        return nums[nums.length - k];
+    }
+
+    public int findKthLargest2(int[] nums, int k) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int num : nums) {
             pq.offer(num);
-            if (pq.size()>k)
+            if (pq.size() > k)
                 pq.poll();
         }
         return pq.peek();
+    }
+
+    public int findKthLargest3(int[] nums, int k) {
+        Collections.shuffle(Collections.singletonList(nums));
+        int lo = 0, hi = nums.length - 1;
+        k = nums.length - k;
+        while (lo <= hi) {
+            int p = partition(nums, lo, hi);
+            if (p < k) {
+                lo = p + 1;
+            } else if (p > k) {
+                hi = p - 1;
+            } else
+                return nums[p];
+        }
+        return -1;
+    }
+
+    int partition(int[] nums, int lo, int hi) {
+        int pivot = nums[lo];
+        int i = lo, j = hi + 1;
+        while (true) {
+            while (nums[++i] < pivot) {
+                if (i == hi) break;
+            }
+            while (nums[--j] > pivot) {
+                if (j == lo) break;
+            }
+            if (i >= j) break;
+            exch(nums, i, j);
+        }
+        exch(nums, lo, j);
+        return j;
+    }
+
+    private void exch(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
