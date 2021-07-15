@@ -27,6 +27,13 @@ public class likou215 {
         return nums[nums.length - k];
     }
 
+    /**
+     * 小根堆
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
     public int findKthLargest2(int[] nums, int k) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();
         for (int num : nums) {
@@ -37,6 +44,13 @@ public class likou215 {
         return pq.peek();
     }
 
+    /**
+     * 快排(改进)
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
     public int findKthLargest3(int[] nums, int k) {
         shuffle(nums);
         int lo = 0, hi = nums.length - 1;
