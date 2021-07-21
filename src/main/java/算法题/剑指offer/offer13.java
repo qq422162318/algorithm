@@ -18,13 +18,14 @@ public class offer13 {
         offer13 offer13 = new offer13();
         System.out.println(offer13.movingCount(16, 8, 4));
     }
+
     public int movingCount(int m, int n, int k) {
         boolean[][] visited = new boolean[m][n];
         return dfs(0, 0, m, n, k, visited);
     }
 
     private int dfs(int i, int j, int m, int n, int k, boolean visited[][]) {
-        if (i < 0 || i >= m || j < 0 || j >= n || (i/10 + i%10 + j/10 + j%10) > k || visited[i][j]) {
+        if (i < 0 || i >= m || j < 0 || j >= n || (i / 10 + i % 10 + j / 10 + j % 10) > k || visited[i][j]) {
             return 0;
         }
         visited[i][j] = true;

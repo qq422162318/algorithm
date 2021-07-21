@@ -7,7 +7,7 @@ public class MysqlJdbc {
     public static void main(String args[]) throws Exception {
 //     DriverManager.registerDriver("com.mysql.jdbc.Driver");
         Class.forName("com.mysql.jdbc.Driver");//静态代码快完成数据库驱动注册
-        String url = "jdbc:mysql://192.168.124.10:3306/school";
+        String url = "jdbc:mysql://localhost:3306/school";
         String use = "root";
         String pwd = "123456";
         Connection con = DriverManager.getConnection(url, use, pwd);
