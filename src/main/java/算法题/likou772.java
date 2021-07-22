@@ -30,6 +30,7 @@ public class likou772 {
         likou772 likou772 = new likou772();
         System.out.println(likou772.calculate("2*(5+5*2)"));
     }
+
     public int calculate(String s) {
         s = s.replaceAll(" ", "");
         if (s.length() == 0) return 0;
@@ -42,8 +43,8 @@ public class likou772 {
                 num = num * 10 + (c - '0');
             if (c == '(') {
                 int j = findClosing(s);
-                num = calculate(s.substring(i + 1, i + j));
-                i += j;
+                num = calculate(s.substring(i + 1, j));
+                i += j-i;
             }
             if (!Character.isDigit(c) || i == s.length() - 1) {
                 int pre;
@@ -69,7 +70,7 @@ public class likou772 {
             i++;
         }
         while (!sta.isEmpty())
-            res += (int) sta.pop();
+            res += sta.pop();
         return res;
     }
 
