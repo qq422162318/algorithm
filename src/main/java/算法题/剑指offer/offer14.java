@@ -16,6 +16,6 @@ package 算法题.剑指offer;
  */
 public class offer14 {
     public int cuttingRope(int n) {
-
+        return 0;
     }
 }
