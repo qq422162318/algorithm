@@ -24,10 +24,37 @@ import java.util.Stack;
 public class likou224 {
     public static void main(String[] args) {
         likou224 likou224 = new likou224();
-        System.out.println(likou224.calculate("(1+(4+5+2)-3)+(6+8)"));
+        System.out.println(likou224.calculate("1+(4+5+2)"));
     }
 
     public int calculate(String s) {
+        Stack<Integer> stack = new Stack<>();
+        int sign = 1, res = 0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (Character.isDigit(c)) {
+                int cur = c - '0';
+                while (i + 1 < s.length() && Character.isDigit(s.charAt(i + 1))) {
+                    cur = cur * 10 + s.charAt(++i) - '0';
+                }
+                res = res + sign * cur;
+            } else if (c == '+') {
+                sign = 1;
+            } else if (c == '-') {
+                sign = -1;
+            } else if (c == '(') {
+                stack.push(res);
+                res = 0;
+                stack.push(sign);
+                sign = 1;
+            } else if (c == ')') {
+                res = stack.pop()*res+stack.pop();
+            }
+        }
+        return res;
+    }
+
+    public int calculate2(String s) {
         if (s.equals("")) return 0;
         int n = s.length();
         LinkedList<Character> list = new LinkedList<>();
@@ -41,12 +68,13 @@ public class likou224 {
         Stack<Integer> stack = new Stack<>();
         int num = 0;
         char sign = '+';
-        for (int i = 0; i < list.size(); i++) {
+        while (list.size() > 0) {
             char c = list.poll();
             if (isdigit(c))
                 num = 10 * num + (c - '0');
-            if (c == '(') helper(list);
-            if (!isdigit(c) && c != ' ' || i == list.size() - 1) {
+            if (c == '(')
+                helper(list);
+            if (!isdigit(c) && c != ' ' || list.size() == 0) {
                 int pre = 0;
                 switch (sign) {
                     case '+':
@@ -67,7 +95,8 @@ public class likou224 {
                 sign = c;
                 num = 0;
             }
-            if (c == ')') break;
+            if (c == ')')
+                break;
         }
         int sum = 0;
         while (!stack.isEmpty()) {
