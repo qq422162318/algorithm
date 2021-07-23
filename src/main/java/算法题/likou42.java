@@ -19,7 +19,7 @@ public class likou42 {
     public static void main(String[] args) {
         int[] num = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
         int result = trap(num);
-        System.out.println("result+++++++:" + result);
+        System.out.println("result is " + result);
     }
 
     public static int trap1(int[] height) {
