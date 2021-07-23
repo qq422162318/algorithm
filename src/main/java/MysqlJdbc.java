@@ -7,7 +7,7 @@ public class MysqlJdbc {
     public static void main(String args[]) throws Exception {
 //     DriverManager.registerDriver("com.mysql.jdbc.Driver");
         Class.forName("com.mysql.jdbc.Driver");//静态代码快完成数据库驱动注册
-        String url = "jdbc:mysql://localhost:3306/school";
+        String url = "jdbc:mysql://192.168.124.171:3306/school";
         String use = "root";
         String pwd = "123456";
         Connection con = DriverManager.getConnection(url, use, pwd);
@@ -31,7 +31,7 @@ public class MysqlJdbc {
         Long begin = new java.util.Date().getTime();
         Random random = new Random();
         // sql前缀
-        String prefix = "INSERT INTO goods (goodsname,goodstype,goodssn,goodsprice,goodsnumber) VALUES ";
+        String prefix = "INSERT INTO goodss (goodsname,goodstype,goodssn,goodsprice,goodsnumber) VALUES ";
         try {
             // 保存sql后缀
             StringBuffer suffix = new StringBuffer();
@@ -48,7 +48,7 @@ public class MysqlJdbc {
                     UUID uuid = UUID.randomUUID();
                     String s = String.valueOf(uuid);
                     s=s.substring(0,8);
-                    suffix.append("('" + s+ "','" + "人" + "','192301'" +",'"+random.nextInt(500)+"','"+random.nextInt(100)+"'),");
+                    suffix.append("('" + s+ "','" + "人" + "','"+random.nextInt(192301)+"','"+random.nextInt(500)+"','"+random.nextInt(100)+"'),");
                 }
                 // 构建完整SQL
                 String sql = prefix + suffix.substring(0, suffix.length() - 1);
