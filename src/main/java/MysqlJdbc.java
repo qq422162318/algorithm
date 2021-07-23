@@ -6,7 +6,7 @@ import java.util.UUID;
 public class MysqlJdbc {
     public static void main(String args[]) throws Exception {
 //     DriverManager.registerDriver("com.mysql.jdbc.Driver");
-        Class.forName("com.mysql.jdbc.Driver");//静态代码快完成数据库驱动注册
+        Class.forName("com.mysql.jdbc.Driver");
         String url = "jdbc:mysql://2bzqlelz.shenzhuo.vip:30158/school";
         String use = "root";
         String pwd = "123456";
