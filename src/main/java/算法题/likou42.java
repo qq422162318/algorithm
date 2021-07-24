@@ -15,23 +15,22 @@ import java.util.Stack;
 public class likou42 {
     public static void main(String[] args) {
         int[] num = {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
-        int result = trap(num);
+        likou42 likou42 = new likou42();
+        int result = likou42.trap(num);
         System.out.println("result is " + result);
     }
 
-    public static int trap1(int[] height) {
+    public int trap(int[] height) {
         int res = 0;
         // 遍历每个柱子
         for (int i = 1; i < height.length - 1; i++) {
             int leftMax = 0, rightMax = 0;
             // 计算当前柱子左侧的柱子中的最大高度
-            for (int j = 0; j <= i; j++) {
+            for (int j = 0; j <= i; j++)
                 leftMax = Math.max(leftMax, height[j]);
-            }
             // 计算当前柱子右侧的柱子中的最大高度
-            for (int j = i; j < height.length; j++) {
+            for (int j = i; j < height.length; j++)
                 rightMax = Math.max(rightMax, height[j]);
-            }
             // 结果中累加当前柱子顶部可以储水的高度，
             // 即 当前柱子左右两边最大高度的较小者 - 当前柱子的高度。
             res += Math.min(leftMax, rightMax) - height[i];
@@ -39,7 +38,7 @@ public class likou42 {
         return res;
     }
 
-    public static int trap2(int[] nums) {
+    public int trap2(int[] nums) {
         int ans = 0, leftIndex = 0, rightIndex = nums.length - 1;
         int leftMax = 0, rightMax = 0;
         while (leftIndex <= rightIndex) {
@@ -62,7 +61,7 @@ public class likou42 {
      * @param nums
      * @return
      */
-    public static int trap(int[] nums) {
+    public int trap3(int[] nums) {
         if (nums.length == 0) return 0;
         int n = nums.length;
         int right = n - 1, left = 0, res = 0;
