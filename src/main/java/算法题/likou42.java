@@ -38,23 +38,6 @@ public class likou42 {
         return res;
     }
 
-    public int trap2(int[] nums) {
-        int ans = 0, leftIndex = 0, rightIndex = nums.length - 1;
-        int leftMax = 0, rightMax = 0;
-        while (leftIndex <= rightIndex) {
-            if (leftMax <= rightMax) {
-                leftMax = Math.max(leftMax, nums[leftIndex]);
-                ans += leftMax - nums[leftIndex];
-                leftIndex++;
-            } else {
-                rightMax = Math.max(rightMax, nums[rightIndex]);
-                ans += rightMax - nums[rightIndex];
-                rightIndex--;
-            }
-        }
-        return ans;
-    }
-
     /**
      * 双指针 思路
      *
