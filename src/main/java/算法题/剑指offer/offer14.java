@@ -1,7 +1,5 @@
 package 算法题.剑指offer;
 
-import sun.awt.image.ImageWatched;
-
 import java.util.LinkedList;
 
 /**
@@ -39,6 +37,17 @@ public class offer14 {
             }
         }
         return dp[n];
+    }
+
+    public int cuttingRope2(int n) {
+        if (n == 2) return 1;
+        if (n == 3) return 2;
+        int i = 1;
+        while (n > 4) {
+            n = n - 3;
+            i = i * 3;
+        }
+        return i * n;
     }
 
 }

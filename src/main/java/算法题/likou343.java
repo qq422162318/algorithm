@@ -14,7 +14,46 @@ package 算法题;
  * 说明: 你可以假设 n 不小于 2 且不大于 58。
  */
 public class likou343 {
+    public static void main(String[] args) {
+        likou343 likou343 = new likou343();
+        System.out.println(likou343.integerBreak(10));
+    }
+
+    /**
+     * dp
+     *
+     * @param n
+     * @return
+     */
     public int integerBreak(int n) {
-             return 0;
+        if (n == 2) return 1;
+        if (n == 3) return 2;
+        int[] dp = new int[n + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        dp[3] = 3;
+        for (int i = 4; i <= n; i++) {
+            for (int j = 1; j <= i / 2; j++) {
+                dp[i] = Math.max(dp[i], dp[j] * dp[i - j]);
+            }
+        }
+        return dp[n];
+    }
+
+    /**
+     * 贪心
+     *
+     * @param n
+     * @return
+     */
+    public int integerBreak２(int n) {
+        if (n == 2) return 1;
+        if (n == 3) return 2;
+        int i = 1;
+        while (n > 4) {
+            n = n - 3;
+            i = i * 3;
+        }
+        return i * n;
     }
 }
