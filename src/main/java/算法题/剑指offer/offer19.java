@@ -1,5 +1,7 @@
 package 算法题.剑指offer;
 
+import java.util.LinkedList;
+
 /**
  * 剑指 Offer 19. 正则表达式匹配
  * 请实现一个函数用来匹配包含'. '和'*'的正则表达式。模式中的字符'.'表示任意一个字符，而'*'表示它前面的字符可以出现任意次（含0次）。在本题中，匹配是指字符串的所有字符匹配整个模式。例如，字符串"aaa"与模式"a.a"和"ab*ac*a"匹配，但与"aa.a"和"ab*a"均不匹配。
@@ -36,7 +38,36 @@ package 算法题.剑指offer;
  * p 可能为空，且只包含从 a-z 的小写字母以及字符 . 和 *，无连续的 '*'。
  */
 public class offer19 {
-    public boolean isMatch(String s, String p) {
+    public static void main(String[] args) {
+        offer19 offer = new offer19();
+        String s = "ab", p = ".*";
+        System.out.println(offer.isMatch(s, p));
+    }
 
+    public boolean isMatch(String s, String p) {
+        int m = s.length();
+        int n = p.length();
+        boolean[][] dp = new boolean[m + 1][n + 1];
+        dp[0][0] = true;
+        for (int i = 0; i <= m; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (p.charAt(j - 1) == '*') {
+                    dp[i][j] = dp[i][j - 2];
+                    if (match(s, p, i, j - 1))
+                        dp[i][j] = dp[i - 1][j] || dp[i][j - 2];
+                } else {
+                    if (match(s, p, i, j))
+                        dp[i][j] = dp[i - 1][j - 1];
+                }
+            }
+        }
+        return dp[m][n];
+    }
+
+    public boolean match(String s, String p, int i, int j) {
+        if (i == 0) return false;
+        if (p.charAt(j - 1) == '.') return true;
+        if (p.charAt(j - 1) == s.charAt(i - 1)) return true;
+        return false;
     }
 }
