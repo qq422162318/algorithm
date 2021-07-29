@@ -39,6 +39,6 @@ package 算法题.剑指offer;
  */
 public class offer20 {
     public boolean isNumber(String s) {
-
+        return false;
     }
 }
