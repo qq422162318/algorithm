@@ -46,4 +46,26 @@ public class likou20 {
         }
         return stack.isEmpty();
     }
+
+    public boolean isValid3(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : s.toCharArray()) {
+            if (c == '(' || c == '[' || c == '{') {
+                stack.push(c);
+            } else {
+                if (!stack.isEmpty() && stack.peek() == match(c))
+                    stack.pop();
+                else
+                    return false;
+            }
+        }
+        return stack.isEmpty();
+    }
+
+    private char match(char c) {
+        if (c == ')') return '(';
+        if (c == ']') return '[';
+        if (c == '}') return '{';
+        return ' ';
+    }
 }
