@@ -39,6 +39,26 @@ package 算法题.剑指offer;
  */
 public class offer20 {
     public boolean isNumber(String s) {
-        return false;
+        if (s.length() == 0 && s.equals("")) return false;
+        s = s.trim();
+        boolean numFlag = false;
+        boolean dotFloag = false;
+        boolean eFlag = false;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) >= '0' && s.charAt(i) <= '9') {
+                numFlag = true;
+            } else if (s.charAt(i) == '.' && !dotFloag && !eFlag) {
+                dotFloag = true;
+            } else if ((s.charAt(i) == 'e' || s.charAt(i) == 'E') && !eFlag && numFlag) {
+                numFlag = false;
+                eFlag = true;
+            } else if ((s.charAt(i) == '+' || s.charAt(i) == '-') &&
+                    (i == 0 || s.charAt(i - 1) == 'e' || s.charAt(i - 1) == 'E')) {
+
+            } else {
+                return false;
+            }
+        }
+        return numFlag;
     }
 }
