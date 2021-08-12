@@ -1,5 +1,7 @@
 package 算法题;
 
+import java.util.Stack;
+
 /**
  * 921. 使括号有效的最少添加
  * 给定一个由 '(' 和 ')' 括号组成的字符串 S，我们需要添加最少的括号（ '(' 或是 ')'，可以在任何位置），以使得到的括号字符串有效。
@@ -22,7 +24,52 @@ package 算法题;
  * 输出：4
  */
 public class likou921 {
-    public int minAddToMakeValid(String s) {
+    public static void main(String[] args) {
+        String s = "()))((";
+        likou921 likou921 = new likou921();
+        System.out.println(likou921.minAddToMakeValid2(s));
+    }
 
+    public int minAddToMakeValid(String s) {
+        while (s.contains("()"))
+            s = s.replace("()", "");
+        return s.length();
+    }
+
+    public int minAddToMakeValid2(String s) {
+        Stack<Character> stack = new Stack<>();
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                stack.push('(');
+                continue;
+            }
+            if (!stack.isEmpty() && c == get(stack.peek())) {
+                stack.pop();
+                continue;
+            }
+            stack.push(')');
+        }
+        return stack.size();
+    }
+
+    private char get(Character peek) {
+        if (peek == '(') return ')';
+        return '1';
+    }
+
+    public int minAddToMakeValid3(String s) {
+        int res=0;
+        int need=0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i)=='(') need++;
+            if (s.charAt(i)==')'){
+                need--;
+                if (need==-1){
+                    need=0;
+                    res++;
+                }
+            }
+        }
+        return res+need;
     }
 }
