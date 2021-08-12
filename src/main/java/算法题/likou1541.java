@@ -32,6 +32,24 @@ package 算法题;
  */
 public class likou1541 {
     public int minInsertions(String s) {
-
+        int res = 0;
+        int need = 0;
+        for (char c : s.toCharArray()) {
+            if (c == '(') {
+                need += 2;
+                if (need % 2 == 1) {
+                    res++;
+                    need--;
+                }
+            }
+            if (c == ')') {
+                need--;
+                if (need == -1) {
+                    need = 1;
+                    res++;
+                }
+            }
+        }
+        return res + need;
     }
 }
