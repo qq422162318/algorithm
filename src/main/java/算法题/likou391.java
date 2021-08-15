@@ -56,6 +56,13 @@ public class likou391 {
         System.out.println(likou.isRectangleCover(s));
     }
 
+    /**
+     * 如果是完美矩形 那么一定满足两点：
+     * （1）最左下 最左上 最右下 最右上 的四个点只出现一次 其他点成对出现
+     * （2）四个点围城的矩形面积 = 小矩形的面积之和
+     * @param rectangles
+     * @return
+     */
     public boolean isRectangleCover(int[][] rectangles) {
         int x1 = 1, x2 = 1;
         int y1 = 1, y2 = 1;
@@ -68,19 +75,19 @@ public class likou391 {
             x2 = Math.max(x2, rect[2]);
             y2 = Math.max(y2, rect[3]);
             actual_area += (rect[2] - rect[0]) * (rect[3] - rect[1]);
-            add(temp,rect);
+            add(temp, rect);
             for (String in : temp) {
                 if (set.contains(in))
                     set.remove(in);
                 else
                     set.add(in);
             }
-            for (int i = temp.size()-1; i >= 0; i--) temp.remove(i);
+            for (int i = temp.size() - 1; i >= 0; i--) temp.remove(i);
         }
         int expect_area = (x2 - x1) * (y2 - y1);
         if (expect_area != actual_area) return false;
         if (set.size() != 4) return false;
-        add(temp,new int[]{x1,y1,x2,y2});
+        add(temp, new int[]{x1, y1, x2, y2});
         for (String in : temp)
             if (!set.contains(in)) return false;
         return true;
