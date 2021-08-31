@@ -1,5 +1,7 @@
 package 算法题;
 
+import java.util.ArrayList;
+
 /**
  * 392. 判断子序列
  * 给定字符串 s 和 t ，判断 s 是否为 t 的子序列。
@@ -17,6 +19,12 @@ package 算法题;
  */
 public class likou392 {
     public boolean isSubsequence(String s, String t) {
-
+        int m = s.length(), n = t.length();
+        int j = 0;
+        for (int i = 0; i < n && j < m; i++) {
+            if (s.charAt(j) == t.charAt(i))
+                j++;
+        }
+        return j == m;
     }
 }
