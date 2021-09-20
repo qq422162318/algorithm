@@ -22,6 +22,11 @@ public class likou84 {
         System.out.println(i);
     }
 
+    /**
+     * 单调栈加首位哨兵
+     * @param heights
+     * @return
+     */
     public int largestRectangleArea(int[] heights) {
         // 这里为了代码简便，在柱体数组的头和尾加了两个高度为 0 的柱体。
         int[] tmp = new int[heights.length + 2];
@@ -58,7 +63,6 @@ public class likou84 {
             }
             area = Math.max(area, w * h);
         }
-
         return area;
     }
 }

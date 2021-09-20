@@ -30,11 +30,15 @@ import java.util.Stack;
 public class likou85 {
     public static void main(String[] args) {
         likou85 likou85 = new likou85();
+//        char[][] m = {
+//                {'1', '0', '1', '0', '0'},
+//                {'1', '0', '1', '1', '1'},
+//                {'1', '1', '1', '1', '1'},
+//                {'1', '0', '0', '1', '0'}
+//        };
         char[][] m = {
-                {'1', '0', '1', '0', '0'},
-                {'1', '0', '1', '1', '1'},
-                {'1', '1', '1', '1', '1'},
-                {'1', '0', '0', '1', '0'}
+                {'0', '1'},
+                {'1', '0'}
         };
         System.out.println(likou85.maximalRectangle(m));
     }
@@ -55,7 +59,7 @@ public class likou85 {
                 }
             }
             tmp[index++] = max;
-            max=0;
+            max = 0;
         }
         int[] ints = new int[tmp.length + 2];
         System.arraycopy(tmp, 0, ints, 1, tmp.length);
