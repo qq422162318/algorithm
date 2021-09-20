@@ -1,5 +1,7 @@
 package 算法题;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Stack;
 
 /**
@@ -20,37 +22,28 @@ public class likou84 {
         System.out.println(i);
     }
 
-    public int largetsrectangleArea(int[] heights) {
-        int n = heights.length;
-        int[] left = new int[n];
-        int[] right = new int[n];
+    public int largestRectangleArea(int[] heights) {
+        // 这里为了代码简便，在柱体数组的头和尾加了两个高度为 0 的柱体。
+        int[] tmp = new int[heights.length + 2];
+        System.arraycopy(heights, 0, tmp, 1, heights.length);
 
-        Stack<Integer> mono_stack = new Stack<Integer>();
-        for (int i = 0; i < n; ++i) {
-            while (!mono_stack.isEmpty() && heights[mono_stack.peek()] >= heights[i]) {
-                mono_stack.pop();
+        Deque<Integer> stack = new ArrayDeque<>();
+        int area = 0;
+        for (int i = 0; i < tmp.length; i++) {
+            // 对栈中柱体来说，栈中的下一个柱体就是其「左边第一个小于自身的柱体」；
+            // 若当前柱体 i 的高度小于栈顶柱体的高度，说明 i 是栈顶柱体的「右边第一个小于栈顶柱体的柱体」。
+            // 因此以栈顶柱体为高的矩形的左右宽度边界就确定了，可以计算面积🌶️ ～
+            while (!stack.isEmpty() && tmp[i] < tmp[stack.peek()]) {
+                int h = tmp[stack.pop()];
+                area = Math.max(area, (i - stack.peek() - 1) * h);
             }
-            left[i] = (mono_stack.isEmpty() ? -1 : mono_stack.peek());
-            mono_stack.push(i);
+            stack.push(i);
         }
 
-        mono_stack.clear();
-        for (int i = n - 1; i >= 0; --i) {
-            while (!mono_stack.isEmpty() && heights[mono_stack.peek()] >= heights[i]) {
-                mono_stack.pop();
-            }
-            right[i] = (mono_stack.isEmpty() ? n : mono_stack.peek());
-            mono_stack.push(i);
-        }
-
-        int ans = 0;
-        for (int i = 0; i < n; ++i) {
-            ans = Math.max(ans, (right[i] - left[i] - 1) * heights[i]);
-        }
-        return ans;
+        return area;
     }
 
-    public int largestRectangleArea(int[] heights) {
+    public int largestRectangleArea1(int[] heights) {
         int area = 0, n = heights.length;
         for (int i = 0; i < n; i++) {
             //向左找到比当前高度更低的一行
@@ -67,33 +60,5 @@ public class likou84 {
         }
 
         return area;
-    }
-
-    public int largestRectangleArea2(int[] heights) {
-        int len = heights.length;
-        // 特判
-        if (len == 0) {
-            return 0;
-        }
-
-        int res = 0;
-        for (int i = 0; i < len; i++) {
-
-            // 找左边最后 1 个大于等于 heights[i] 的下标
-            int left = i;
-            int curHeight = heights[i];
-            while (left > 0 && heights[left - 1] >= curHeight) {
-                left--;
-            }
-
-            // 找右边最后 1 个大于等于 heights[i] 的索引
-            int right = i;
-            while (right < len - 1 && heights[right + 1] >= curHeight) {
-                right++;
-            }
-            int width = right - left + 1;
-            res = Math.max(res, width * curHeight);
-        }
-        return res;
     }
 }
