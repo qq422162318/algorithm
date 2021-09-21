@@ -30,40 +30,46 @@ import java.util.Stack;
 public class likou85 {
     public static void main(String[] args) {
         likou85 likou85 = new likou85();
-//        char[][] m = {
-//                {'1', '0', '1', '0', '0'},
-//                {'1', '0', '1', '1', '1'},
-//                {'1', '1', '1', '1', '1'},
-//                {'1', '0', '0', '1', '0'}
-//        };
         char[][] m = {
-                {'0', '1'},
-                {'1', '0'}
+                {'1', '0', '1', '0', '0'},
+                {'1', '0', '1', '1', '1'},
+                {'1', '1', '1', '1', '1'},
+                {'1', '0', '0', '1', '0'}
         };
+//        char[][] m = {
+//                {'0', '1'},
+//                {'1', '0'}
+//        };
         System.out.println(likou85.maximalRectangle(m));
     }
 
     public int maximalRectangle(char[][] matrix) {
-        int[] tmp = new int[matrix.length];
-        int index = 0;
-        int max = 0;
-        Stack<Integer> stack = new Stack<>();
-        for (char[] chars : matrix) {
-            for (int i = 0; i < chars.length; i++) {
-                if (chars[i] == '1' && max == 0) {
-                    max++;
-                    continue;
-                }
-                if (i >= 1 && chars[i] == '1' && chars[i - 1] == '1') {
-                    max++;
+        if (matrix.length == 0 || matrix[0].length == 0)
+            return 0;
+        int row = matrix.length;
+        int col = matrix[0].length;
+        int[] heights = new int[col];
+        int ans = 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] == '1') {
+                    heights[j] += 1;
+                } else {
+                    heights[j] = 0;
                 }
             }
-            tmp[index++] = max;
-            max = 0;
+            ans = Math.max(ans, largestRectangleArea(heights));
         }
+        return ans;
+    }
+
+    public int largestRectangleArea(int[] tmp) {
+        Stack<Integer> stack = new Stack<>();
         int[] ints = new int[tmp.length + 2];
-        System.arraycopy(tmp, 0, ints, 1, tmp.length);
+        for (int i = 1; i < ints.length - 1; i++)
+            ints[i] = tmp[i - 1];
         tmp = ints;
+        int max = 0;
         for (int i = 0; i < tmp.length; i++) {
             while (!stack.isEmpty() && tmp[i] < tmp[stack.peek()]) {
                 int h = tmp[stack.pop()];
