@@ -3,14 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .a{
+            width: 42px;
+            height: 37px;
+            position: absolute;
+            background-color: red;
+        }
+        .a:hover{
+            width: 42px;
+            height: 37px;
+            transform: translate(90px,0px) translate(0px,0px) translate(90px,0px);
+            background-color: red;
+            transition: transform 5s ease 0s;
+        }
+        .b{
+            width: 42px;
+            height: 37px;
+            position: absolute;
+            background-color: red;
+            left: 90px;
+            top: 100px;
+        }
+        .b:hover{
+            transform: rotate(90deg) translate(720px,-500px);
+            background-color: red;
+            transition: transform 5s ease 0s;
+        }
+    </style>
 </head>
 <body>
-<input id="bottom" type="button" value="按钮" >
-<a href="wwww.baidu.com" aria-valuetext="anniu"></a>
+    <div id="box">
+        <div class="a">pianyi</div>
+        <br>
+        <div class="b">rotate</div>
+    </div>
 </input>
 <script type="text/javascript">
-    document.write("learn javascript")
-    alert("yang")
+
 </script>
 </body>
 </html>
