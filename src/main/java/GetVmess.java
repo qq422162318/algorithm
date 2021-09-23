@@ -27,7 +27,7 @@ public class GetVmess {
         String cipherText = null;
         String key = "ks9KUrbWJj46AftX"; //黑洞、雷霆、蜜蜂通用密钥
         //key = "awdtif20190619ti"; //旋风密钥
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             try {
                 response = httpClient.execute(request);
                 if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {

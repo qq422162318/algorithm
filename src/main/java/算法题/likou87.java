@@ -33,15 +33,35 @@ import java.util.Arrays;
 public class likou87 {
     public boolean isScramble(String s1, String s2) {
         if (s1 == "" || s2 == "") return false;
-        if (s2.length() != s1.length()) return false;
-        char[] ss1 = s1.toCharArray();
-        char[] ss2 = s2.toCharArray();
-        Arrays.sort(ss1);
-        Arrays.sort(ss2);
-        if (!String.valueOf(ss1).equals(String.valueOf(ss2)))
-            return false;
-
-        return false;
+        int n = s1.length();
+        int m = s2.length();
+        if (n != m) return false;
+        char[] chs1 = s1.toCharArray();
+        char[] chs2 = s2.toCharArray();
+        boolean[][][] dp = new boolean[n][n][n + 1];
+        // 初始化单个字符的情况
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                dp[i][j][1] = chs1[i] == chs2[j];
+            }
+        }
+        for (int len = 2; len <= n; len++) {
+            for (int i = 0; i <= n - len; i++) {
+                for (int j = 0; j <= n - len; j++) {
+                    for (int k = 1; k <= len - 1; k++) {
+                        if (dp[i][j][k] && dp[i + k][j + k][len - k]) {
+                            dp[i][j][len] = true;
+                            break;
+                        }
+                        if (dp[i][j + len - k][k] && dp[i + k][j][len - k]) {
+                            dp[i][j][len] = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return dp[0][0][n];
     }
 
 }
