@@ -5,15 +5,17 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
+
 import java.io.IOException;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.Charset;
 import java.util.Base64;
+
 public class GetVmess {
     public static void main(String[] args) {
-        //        JAVA在线运行：https://www.tutorialspoint.com/compile_java_online.php
+//        JAVA在线运行：https://www.tutorialspoint.com/compile_java_online.php
 //        雷霆：https://www.lt71126.xyz:20000/api/evmess
 //        黑洞：https://www.hd327658.xyz:20000/api/evmess
 //        蜜蜂：https://www.09898434.xyz/api/evmess?deviceid=49c95313d64fb7c5unknown&apps=cd9186e318e291300db27867d958eae5
@@ -28,28 +30,29 @@ public class GetVmess {
         for (int i = 0; i < 10; i++) {
             try {
                 response = httpClient.execute(request);
-                if(response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+                if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
                     HttpEntity httpEntity = response.getEntity();
                     String html = EntityUtils.toString(httpEntity, "utf-8");
-                    if (i==0){
-                        cipherText=html;
-                    }else {
-                        cipherText=cipherText+" "+html;
+                    if (i == 0) {
+                        cipherText = html;
+                    } else {
+                        cipherText = cipherText + " " + html;
                     }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        String[] strArray=cipherText.split(" ");
+        String[] strArray = cipherText.split(" ");
         for (String text : strArray) {
             try {
-                System.out.println(decrypt(text,key));
+                System.out.println(decrypt(text, key));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
     }
+
     public static String decrypt(String str, String str2) throws Exception {
         Cipher instance = Cipher.getInstance("AES/CBC/NoPadding");
         byte[] bytes = str2.getBytes(Charset.forName("UTF-8"));
