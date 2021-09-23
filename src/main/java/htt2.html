@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>游戏排行榜</title>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        #box{
+            width: 308px;
+            height: 500px;
+            margin: 100px auto;
+
+        }
+        .bottom{
+            width: 303px;
+            overflow: hidden;/*加边框*/
+            border-left: 2px solid whitesmoke;
+            border-right: 2px solid whitesmoke;
+            border-bottom: 2px solid whitesmoke;
+        }
+        .top{
+            width:100%;
+        }
+        h3{
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            text-indent:10px ;
+            background-image: url(../img/h1_bg.gif);
+            background-size: 306px 40px;
+            background-repeat: no-repeat;
+            background-position: 0px 1px;
+        }
+        .left{
+            float: left;
+            width: 70%;
+            height: 400px;
+            /*background: red;*/
+        }
+        .right{
+            float: right;
+            width: 30%;
+            height: 400px;
+            /*background: yellow;*/
+        }
+        li{
+            list-style: none;
+            line-height: 40px;
+        }
+        .left li{
+            text-indent: 30px;
+            background-repeat: no-repeat;
+            background-position: 10px 15px;
+        }
+        .left li:nth-child(1){
+            background-image: url(../img/num_02.gif);
+        }
+        .left li:nth-child(2){
+            background-image: url(../img/num_03.gif);
+        }
+        .left li:nth-child(3){
+            background-image: url(../img/num_04.gif);
+        }
+        .left li:nth-child(4){
+            background-image: url(../img/num_05.gif);
+        }
+        .left li:nth-child(5){
+            background-image: url(../img/num_06.gif);
+        }
+        .left li:nth-child(6){
+            background-image: url(../img/num_07.gif);
+        }
+        .left li:nth-child(7){
+            background-image: url(../img/num_08.gif);
+        }
+        .right li{
+            text-indent: 8px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+
+    <div class="top">
+        <h3>新品游戏</h3>
+        <img style="margin-left: 1px;" src="../img/game_01.gif"/>
+    </div>
+    <div class="bottom">
+        <div class="left">
+            <ul>
+                <li>原神</li>
+                <li>哈利波特</li>
+                <li>王者荣耀</li>
+                <li>云顶之弈</li>
+                <li>阴阳师</li>
+                <li>斗地主</li>
+                <li>我的世界</li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+        <div class="right">
+            <ul>
+                <li><img src="../img/star_0.gif" alt="" /></li>
+                <li><img src="../img/star_2.gif" alt="" /></li>
+                <li><img src="../img/star_0.gif" alt="" /></li>
+                <li><img src="../img/star_5.gif" alt="" /></li>
+                <li><img src="../img/star_5.gif" alt="" /></li>
+                <li><img src="../img/star_3.gif" alt="" /></li>
+                <li><img src="../img/star_4.gif" alt="" /></li>
+                <li><img src="" alt="" /></li>
+                <li><img src="" alt="" /></li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

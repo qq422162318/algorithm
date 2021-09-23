@@ -30,6 +30,9 @@ package 算法题;
  */
 public class likou87 {
     public boolean isScramble(String s1, String s2) {
-
+          if(s1==""||s2=="") return false;
+          if (s2.length()!=s1.length()) return false;
+          if ()
     }
+
 }

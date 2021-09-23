@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作业2</title>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #box {
+            width: 400px;
+            height: 409px;
+            border: 3px solid goldenrod;
+            margin: 100px auto;
+        }
+
+        h2 {
+            width: 100%;
+            height: 40px;
+            background-color: indianred;
+            text-indent: 2em;
+            line-height: 50px;
+        }
+
+        li {
+            list-style: none;
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px dashed black;
+            cursor: pointer;
+            /*鼠标滑过变小手*/
+        }
+
+        span {
+            display: inline-block;
+            width: 40px;
+            height: 140px;
+            text-align: center;
+            background-image: url(img/dot_01.gif);
+            background-repeat: no-repeat;
+            background-position: 7px 9px;
+            color: white;
+        }
+
+        li:hover {
+            font-weight: bold;
+            color: red;
+        }
+
+        li:hover span {
+            /****/
+            font-weight: bold;
+            background-image: url(img/dot_02.gif);
+            background-repeat: no-repeat;
+            background-position: 7px 9px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="box">
+    <h2>大家都喜欢的美容品</h2>
+    <li><span>1</span>雅诗兰黛即时修护上部精华霜15ml</li>
+    <li><span>1</span>伊丽莎白雅顿显效复合活肤霜75ml</li>
+    <li><span>1</span>OLAY玉兰油多次修护霜50g</li>
+    <li><span>1</span>巨型一号丝瓜水200ml</li>
+    <li><span>1</span>傅碧保湿洁肤水2号 200ml</li>
+    <li><span>1</span>兰芝夜间修护锁水面莫</li>
+    <li><span>1</span>比度克细肤</li>
+    <li><span>1</span>sk-ll</li>
+    <li><span>1</span>欧莱雅青春密码颜精华肌底液</li>
+</div>
+</body>
+
+</html>

@@ -1,43 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        .a{
-            width: 42px;
-            height: 37px;
-            position: absolute;
-            background-color: red;
-        }
-        .a:hover{
-            width: 42px;
-            height: 37px;
-            transform: translate(90px,0px) translate(0px,0px) translate(90px,0px);
-            background-color: red;
-            transition: transform 5s ease 0s;
-        }
-        .b{
-            width: 42px;
-            height: 37px;
-            position: absolute;
-            background-color: red;
-            left: 90px;
-            top: 100px;
-        }
-        .b:hover{
-            transform: rotate(90deg) translate(720px,-500px);
-            background-color: red;
-            transition: transform 5s ease 0s;
-        }
-    </style>
-</head>
-<body>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title></title>
+        <style type="text/css">
+            #box{
+                width: 80%;
+                height: 600px;
+                margin: 100px auto;
+                border: 1px solid black;
+            }
+            #box>div{
+                width: 150px;
+                height: 150px;
+            }
+            .a{
+                background-color:red;
+                animation:aAnimation 5s ease 0s;
+                animation-iteration-count:infinite; /*默认值为1，动画执行次数，infinite循环播放*/
+                animation-direction:alternate; /*动画下一次播放是否逆向进行 alternate逆向、normal正常*/
+            }
+            .a:hover{
+                animation-play-state:paused; /*动画状态:running运行、paused暂停*/
+            }
+
+            .b{
+                background-color:yellow ;
+                animation:bA 5s ease 0s;
+                animation-iteration-count:infinite; /*默认值为1，动画执行次数，infinite循环播放*/
+                animation-direction:alternate;
+            }
+
+            .c{
+                background-color:blue ;
+                animation:cA 5s ease 0s;
+                /*transform: scale(1.5,0.5);*/
+            }
+            .d{
+                background-color:green ;
+                animation:dA 5s ease 0s;
+                /*transform: skew(30deg);*/
+            }
+            /*偏移*/
+            @keyframes aAnimation{
+                from{
+                    background:red;
+                    /*transform: translate(0px,0px);*//*可写可不写*/
+                }
+                to{
+                    background:blue;
+                    transform: translate(100px,0px);
+                }
+            }
+            /*旋转*/
+            @keyframes bA{
+                0%{
+                    background-color: pink;
+                    transform: rotate(30deg);
+                }
+                25%{
+                    background-color: palegoldenrod;
+                    transform: rotate(60deg);
+                }
+                50%{
+                    background-color: palegreen;
+                    transform: rotate(120deg);
+                }
+                100%{
+                    background-color: paleturquoise;
+                    transform: rotate(180deg);
+                }
+            }
+            @keyframes cA{
+                from{
+                    background:blue;
+                }
+                to{
+                    background:deeppink;
+                    transform: scale(1.5,0.5);
+                }
+            }
+            @keyframes dA{
+                from{
+                    background:green;
+                }
+                to{
+                    background: yellow;
+                    transform: skew(30deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
     <div id="box">
-        <div class="a">pianyi</div>
-        <br>
-        <div class="b">rotate</div>
+        <div class="a">偏移</div>
+        <div class="b">旋转</div>
+        <div class="c">缩放</div>
+        <div class="d">倾斜</div>
     </div>
+    </body>
+    </html>
 </input>
 <script type="text/javascript">
 
