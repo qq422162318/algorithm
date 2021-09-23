@@ -1,5 +1,7 @@
 package 算法题;
 
+import java.util.Arrays;
+
 /**
  * 87. 扰乱字符串
  * 使用下面描述的算法可以扰乱字符串 s 得到字符串 t ：
@@ -30,9 +32,16 @@ package 算法题;
  */
 public class likou87 {
     public boolean isScramble(String s1, String s2) {
-          if(s1==""||s2=="") return false;
-          if (s2.length()!=s1.length()) return false;
-          if ()
+        if (s1 == "" || s2 == "") return false;
+        if (s2.length() != s1.length()) return false;
+        char[] ss1 = s1.toCharArray();
+        char[] ss2 = s2.toCharArray();
+        Arrays.sort(ss1);
+        Arrays.sort(ss2);
+        if (!String.valueOf(ss1).equals(String.valueOf(ss2)))
+            return false;
+
+        return false;
     }
 
 }
