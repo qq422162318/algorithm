@@ -32,24 +32,40 @@ import java.util.List;
  */
 public class likou89 {
     List<Integer> list = new LinkedList<>();
+    boolean visit[];
 
     public List<Integer> grayCode(int n) {
         ArrayList<Integer> list = new ArrayList<>();
         list.add(0);
-        int head=1;
+        int head = 1;
         for (int i = 0; i < n; i++) {
-            for (int j = list.size()-1; j >= 0 ; j--) {
-                list.add(head+list.get(j));
+            for (int j = list.size() - 1; j >= 0; j--) {
+                list.add(head + list.get(j));
             }
-            head=head<<1;
+            head = head << 1;
         }
         return list;
-        //        trackback(n, new StringBuilder(),new int[]{0,1});
     }
 
-    private void trackback(int n, StringBuilder sb, int[] ints) {
-        if (n==sb.length()){
-            list.add(Integer.valueOf(sb.toString()));
+    public List<Integer> grayCode2(int n) {
+        visit = new boolean[1 << n];
+        trackback(n, 0);
+        return list;
+    }
+
+    private boolean trackback(int n, int cur) {
+        if ((1 << n) == list.size()) {
+            return true;
         }
+        list.add(cur);
+        visit[cur] = true;
+        for (int i = 0; i < n; i++) {
+            int next = cur ^ (1 << i);
+            if (!visit[next] && trackback(n, next)) {
+                return true;
+            }
+        }
+        visit[cur] = false;
+        return false;
     }
 }
