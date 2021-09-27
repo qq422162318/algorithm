@@ -35,7 +35,7 @@ package 算法题;
 public class likou91 {
     public static void main(String[] args) {
         likou91 likou91 = new likou91();
-        System.out.println(likou91.numDecodings2("10"));
+        System.out.println(likou91.numDecodings("230"));
     }
 
     public int numDecodings(String s) {
@@ -56,36 +56,5 @@ public class likou91 {
             }
         }
         return dp[length - 1];
-    }
-
-    public int numDecodings2(String s) {
-        int n = s.length();
-        if (n == 0) return 0;
-        if (s.charAt(0) == '0') return 0;
-        int[] dp = new int[n];
-        dp[0] = 1;
-        for (int i = 0; i < n; i++) {
-            if (i == 0) continue;
-            if (s.charAt(i - 1) != '0' && s.charAt(i) != '0' && ((s.charAt(i - 1) - '0') * 10 + (s.charAt(i) - '0')) <= 26) {
-                dp[i] = dp[i - 1];
-                if (i > 1)
-                    dp[i] += dp[i - 2];
-                if (i == 1)
-                    dp[i]++;
-            }
-            if (s.charAt(i) == '0' && ((s.charAt(i - 1) - '0') * 10 + (s.charAt(i) - '0')) <= 26) {
-                if (i > 1)
-                    dp[i] += dp[i - 2];
-                if (i == 1)
-                    dp[i]++;
-            }
-            if ((s.charAt(i - 1) == '0' && s.charAt(i) != '0') && ((s.charAt(i - 1) - '0') * 10 + (s.charAt(i) - '0')) <= 26){
-                if (i>1)
-                    dp[i]+=dp[i-1];
-                if (i==1)
-                    dp[i]++;
-            }
-        }
-        return dp[n - 1];
     }
 }
