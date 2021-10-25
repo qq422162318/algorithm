@@ -3,7 +3,7 @@ import java.lang.String;
 public class dpTest {
     public static void main(String[] args) {
         int fib = fib2(20);
-        System.out.println(fib);
+        System.out.println(16>>6);
     }
 
     public static int fib(int N) {

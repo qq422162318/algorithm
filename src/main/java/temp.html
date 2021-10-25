@@ -9,17 +9,14 @@
 </head>
 <body>
 <div id="box">
-    <button onclick="lens()">click</button>
+    <button onclick="calcMD5()">click</button>
 </div>
 </body>
 </html>
 </input>
 <script type="text/javascript">
-    function lens() {
-        var str="jwc1";
-        alert(str.length)
-    }
     function calcMD5(str) {
+        var val="1jwc112345678";
         return binl2hex(coreMD5(str2binl(str)));
     }
 
@@ -30,19 +27,21 @@
             str += hex_tab.charAt((binarray[i >> 2] >> ((i % 4) * 8 + 4)) & 0xF) +
                 hex_tab.charAt((binarray[i >> 2] >> ((i % 4) * 8)) & 0xF)
         }
+        alert(str+"12345678"+"1")
         return str;
     }
 
     function str2binl(str) {
         if(str=="") alert("str is null")
-        var nblk = 1 // number of 16-word blocks
+        var str=String(str);
+        var nblk = ((str.length + 8) >> 6) + 1 // number of 16-word blocks
         var blks = new Array(nblk * 16)
         for (var i = 0; i < nblk * 16; i++)
             blks[i] = 0
-        for (var i = 0; i < 4; i++)
+        for (var i = 0; i < str.length; i++)
             blks[i >> 2] |= (str.charCodeAt(i) & 0xFF) << ((i % 4) * 8)
         blks[i >> 2] |= 0x80 << ((i % 4) * 8)
-        blks[nblk * 16 - 2] = 4 * 8
+        blks[nblk * 16 - 2] = str.length * 8
         return blks;
     }
 
@@ -152,6 +151,9 @@
 
     function ii(a, b, c, d, x, s, t) {
         return cmn(c ^ (b | (~d)), a, b, x, s, t);
+    }
+    function rol(num, cnt) {
+        return (num << cnt) | (num >>> (32 - cnt));
     }
 </script>
 </body>
