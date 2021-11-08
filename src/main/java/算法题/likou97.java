@@ -21,10 +21,9 @@ package 算法题;
  */
 public class likou97 {
     public static void main(String[] args) {
-//        System.out.println(true & false);
+        System.out.println(true & false);
         likou97 likou97 = new likou97();
-        String s1 = "aabcc", s2 = "dbbca", s3 = "aadbbcbcac";
-        System.out.println(likou97.isInterleave(s1, s2, s3));
+        System.out.println(likou97.isInterleave("aabcc", "dbbca", "aadbbcbcac"));
     }
 
     public boolean isInterleave(String s1, String s2, String s3) {
@@ -40,8 +39,7 @@ public class likou97 {
         }
         for (int i = 1; i <= s1.length(); i++) {
             for (int j = 1; j <= s2.length(); j++) {
-                dp[i][j] = (dp[i - 1][j] & s1.charAt(i - 1) == s3.charAt(i + j - 1)) |
-                        (dp[i][j - 1] & s2.charAt(j - 1) == s3.charAt(i + j - 1));
+                dp[i][j] = dp[i - 1][j] && (s2.charAt(j - 1) == s3.charAt(i - 1));
             }
         }
         return dp[s1.length()][s2.length()];
