@@ -1,8 +1,6 @@
 package 算法题;
 
-import org.omg.CORBA.INTERNAL;
 import 算法题.剑指offer.TreeNode;
-
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.LinkedList;
@@ -34,11 +32,16 @@ public class likou102 {
         right.left = new TreeNode(15);
         right.right = new TreeNode(7);
         likou102 likou102 = new likou102();
-        likou102.levelOrder(root);
+        List<List<Integer>> list=likou102.levelOrder(root);
+        for (List<Integer> ing : list) {
+            for(int i:ing){System.out.print(i+"-");}
+            System.out.println("\n");
+        }
     }
 
     public List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> list = new ArrayList<>();
+        if(root==null) return list;
         Deque<TreeNode> deque = new LinkedList<>();
         deque.offer(root);
         while (!deque.isEmpty()) {
@@ -47,11 +50,11 @@ public class likou102 {
             while (n > 0) {
                 TreeNode node = deque.poll();
                 temp.add(node.val);
-                list.add(temp);
                 if (node.left != null) deque.offer(node.left);
                 if (node.right != null) deque.offer(node.right);
                 n--;
             }
+            list.add(temp);
         }
         return list;
     }
